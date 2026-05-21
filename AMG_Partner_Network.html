@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMG · Partner Network</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --negro:  #000000;
+    --plomo:  #7F7F7F;
+    --blanco: #FFFFFF;
+    --dorado: #C49849;
+    --bg:     #F7F5F2;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #e8e4df;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .card {
+    width: 390px;
+    height: 693px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before, .card::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--dorado) 30%, var(--dorado) 70%, transparent 100%);
+    z-index: 20;
+  }
+  .card::before { top: 0; }
+  .card::after  { bottom: 0; }
+
+  .glow {
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(196,152,73,0.10) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .inner {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 36px 36px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 44px;
+  }
+  .logo-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  /* AJUSTA AQUÍ EL TAMAÑO DEL LOGO */
+  .logo-block img {
+    height: 72px;   /* ← sube o baja este valor */
+    width: auto;
+    display: block;
+  }
+  .tagline {
+    font-size: 8px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--plomo);
+    margin-top: 9px;
+    text-align: right;
+  }
+
+  /* ── EYEBROW ── */
+  .eyebrow {
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--dorado);
+    margin-bottom: 18px;
+  }
+
+  /* ── HERO: S/ inline como prefijo superíndice de 200 ── */
+  .hero-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 118px;
+    font-weight: 300;
+    color: var(--negro);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+  }
+  /* S/ : mismo tratamiento que % en Inner Circle */
+  .hero-sol {
+    font-size: 46px;
+    font-weight: 300;
+    color: var(--dorado);
+    vertical-align: super;
+    line-height: 1;
+    letter-spacing: 0;
+    margin-right: 2px;
+  }
+
+  .hero-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--plomo);
+    line-height: 1.3;
+    margin-top: 8px;
+    margin-bottom: 28px;
+  }
+  .hero-desc span {
+    color: var(--negro);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: rgba(196,152,73,0.6);
+    margin-bottom: 26px;
+  }
+
+  .body-text {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(0,0,0,0.52);
+    line-height: 1.85;
+    margin-bottom: 28px;
+  }
+  .body-text strong {
+    color: var(--negro);
+    font-weight: 500;
+  }
+
+  /* ── RULES ── */
+  .rules {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .rule-marker {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--dorado);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .rule-text {
+    font-size: 11.5px;
+    font-weight: 300;
+    color: rgba(0,0,0,0.45);
+    line-height: 1.55;
+  }
+  .rule-text strong {
+    color: var(--negro);
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: auto;
+    padding-top: 22px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .footer-note {
+    font-size: 8px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.22);
+    line-height: 1.7;
+  }
+  .footer-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(196,152,73,0.6);
+    letter-spacing: 0.1em;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="glow"></div>
+
+    <div class="inner">
+
+      <div class="header">
+        <div class="logo-block">
+          <img src="https://amg-strategic-investments.github.io/framework/Logo_AMG_Grey.png" alt="AMG">
+          <div class="tagline">Strategic Investments</div>
+        </div>
+      </div>
+
+      <div class="eyebrow">Partner Network · Comisión por Referido</div>
+
+      <!-- S/ como superíndice prefijo, inline con 200 -->
+      <div class="hero-number"><span class="hero-sol">S/</span>200</div>
+      <div class="hero-desc">por cada cliente<br>que <span>completa su despliegue</span></div>
+
+      <div class="divider"></div>
+
+      <div class="body-text">
+        Por cada contacto que refirieras y que complete<br>
+        su incorporación al programa AMG, recibes<br>
+        <strong>S/ 200 en transferencia directa.</strong>
+      </div>
+
+      <div class="rules">
+        <div class="rule">
+          <div class="rule-marker"></div>
+          <div class="rule-text"><strong>Sin mínimos</strong> — cada referido que cierra cuenta</div>
+        </div>
+        <div class="rule">
+          <div class="rule-marker"></div>
+          <div class="rule-text"><strong>Pago directo</strong> — transferencia el mes siguiente al cierre</div>
+        </div>
+        <div class="rule">
+          <div class="rule-marker"></div>
+          <div class="rule-text"><strong>Acumulable</strong> — sin techo de referidos por año</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-note">
+          AMG Strategic Investments<br>
+          Información confidencial · 2026
+        </div>
+        <div class="footer-tag">Partner Network</div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
