@@ -53,16 +53,41 @@
   }
 
   /* ===== Home Link ===== */
-  .home-link {
+  /* ===== Top Nav Bar ===== */
+  .top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(196,151,58,0.12);
+  }
+  .top-nav-home {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 18px;
+    gap: 5px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
     transition: color 0.2s;
+    text-decoration: none;
+    letter-spacing: 0.04em;
   }
-  .home-link:hover { color: var(--gold); }
+  .top-nav-home:hover { color: rgba(255,255,255,0.65); }
+  .top-nav-sim {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--gold);
+    transition: opacity 0.2s;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.75;
+  }
+  .top-nav-sim:hover { opacity: 1; }
+  .top-nav-sim svg { opacity: 0.8; }
 
   /* ===== Header: Logo + Title ===== */
   .header {
@@ -358,7 +383,9 @@
   /* ===== Responsive: Mobile ===== */
   @media (max-width: 720px) {
     .container { padding: 18px 16px 28px; }
-    .home-link { font-size: 12px; margin-bottom: 12px; }
+    .top-nav { margin-bottom: 12px; padding-bottom: 10px; }
+    .top-nav-home { font-size: 11px; }
+    .top-nav-sim { font-size: 10px; }
 
     .header {
       grid-template-columns: 1fr;
@@ -421,8 +448,18 @@
 
 <div class="container">
 
-  <!-- Home Link -->
-  <a href="https://amg-strategic-investments.github.io/framework/" class="home-link">← Home</a>
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <a href="https://amg-strategic-investments.github.io/framework/" class="top-nav-home">
+      ← AMG
+    </a>
+    <a href="AMG_Simulador.html" target="_blank" rel="noopener" class="top-nav-sim">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Simular mi arquitectura
+    </a>
+  </nav>
 
   <!-- Header: Logo (dark bg, white logo) + Title -->
   <div class="header">
