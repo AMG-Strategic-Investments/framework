@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMG · Arquitectura Patrimonial</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --gold:#B8912A; --gold-l:#D4AE52; --gold-pale:#EDD98A;
+  --gold-bg:rgba(184,145,42,.08); --gold-bd:rgba(184,145,42,.25);
+  --ink:#0B0A08; --ink2:#131109; --ink3:#1C1A12; --ink4:#252318; --ink5:#2E2B1C;
+  --stone:#3A3620; --mist:#6A6440; --fog:#948E66; --smoke:#C4BE98;
+  --parch:#EDE8D0; --cream:#F7F4E8;
+  --c-cons:#4A9B7F; --c-mod:#4A7FB5; --c-crec:#B8912A; --c-estr:#7B5EA7;
+  --red-dark:rgba(140,55,40,.75);
+  --red-fill:rgba(120,40,30,.18);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:15px}
+body{background:var(--ink);color:var(--parch);font-family:'Outfit',sans-serif;font-size:1rem;line-height:1.6;min-height:100vh;overflow-x:hidden}
+
+/* ─ screens ─ */
+.screen{display:none;min-height:100vh;animation:fadein .3s ease}
+.screen.active{display:flex;flex-direction:column}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ S0 INTRO ══ */
+#s0{align-items:center;justify-content:center;padding:48px 24px;text-align:center;
+  background:radial-gradient(ellipse 60% 40% at 25% 35%,rgba(184,145,42,.07),transparent),
+             radial-gradient(ellipse 50% 50% at 80% 70%,rgba(184,145,42,.04),transparent)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:76px;font-weight:300;letter-spacing:14px;color:var(--gold);line-height:1;margin-bottom:4px}
+.logo-tag{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--mist);margin-bottom:56px}
+.intro-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,50px);font-weight:400;line-height:1.15;max-width:560px;margin:0 auto 16px}
+.intro-h1 em{font-style:italic;color:var(--gold-l)}
+.intro-p{color:var(--fog);max-width:400px;margin:0 auto 48px;font-size:1rem}
+.orn{display:flex;align-items:center;gap:14px;max-width:220px;margin:0 auto 48px}
+.orn::before,.orn::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(184,145,42,.35))}
+.orn::after{background:linear-gradient(to left,transparent,rgba(184,145,42,.35))}
+.orn-d{width:5px;height:5px;background:var(--gold);transform:rotate(45deg)}
+.name-lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:11px}
+.name-wrap{display:flex;max-width:360px;margin:0 auto 34px;border:1px solid var(--gold-bd);border-radius:2px;background:rgba(184,145,42,.04);transition:border-color .2s}
+.name-wrap:focus-within{border-color:var(--gold)}
+.name-in{flex:1;background:none;border:none;outline:none;padding:14px 20px;text-align:center;font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:var(--parch)}
+.name-in::placeholder{color:var(--stone)}
+.btn-start{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--ink2);border:none;padding:15px 38px;border-radius:2px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s}
+.btn-start:hover{background:var(--gold-l)}
+
+/* ══ S1 CALIBRADOR ══ */
+#s1{flex-direction:row;min-height:100vh}
+.cal-l{flex:1;padding:52px 48px;background:var(--ink2);overflow-y:auto;max-height:100vh}
+.cal-r{width:400px;flex-shrink:0;background:var(--ink3);border-left:1px solid var(--ink5);padding:48px 32px;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;gap:22px}
+
+.eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--mist);margin-bottom:7px;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:'';width:40px;height:1px;background:var(--ink5)}
+.cal-clientname{font-family:'Cormorant Garamond',serif;font-size:30px;font-style:italic;color:var(--gold-l);margin-bottom:40px}
+
+/* Country */
+.country-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:36px}
+.c-opt{background:var(--ink4);border:1px solid var(--ink5);border-radius:3px;padding:11px 10px;cursor:pointer;transition:all .2s;text-align:center;font-size:13px;color:var(--fog);display:flex;align-items:center;gap:9px;justify-content:center}
+.c-opt:hover{border-color:var(--gold-bd)}
+.c-opt.sel{border-color:var(--gold);color:var(--gold-l);background:var(--gold-bg)}
+.c-flag{font-size:20px}
+
+/* Questions */
+.q-block{margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--ink5)}
+.q-block:last-of-type{border-bottom:none}
+.q-num{font-size:11px;letter-spacing:2px;color:var(--mist);text-transform:uppercase;margin-bottom:9px}
+.q-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--smoke);margin-bottom:20px;line-height:1.4}
+
+/* Slider 4-pos */
+.sl-track{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink5);border-radius:3px;overflow:hidden;background:var(--ink4)}
+.sl-opt{padding:13px 6px;cursor:pointer;transition:all .25s;border-right:1px solid var(--ink5);text-align:center;position:relative}
+.sl-opt:last-child{border-right:none}
+.sl-num{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--stone);display:block;margin-bottom:4px;transition:color .25s}
+.sl-lbl{font-size:10px;letter-spacing:1px;color:var(--mist);text-transform:uppercase;display:block;transition:color .25s}
+.sl-opt:hover .sl-num{color:var(--fog)}
+.sl-opt.sel{background:rgba(184,145,42,.12)}
+.sl-opt.sel .sl-num{color:var(--gold-l)}
+.sl-opt.sel .sl-lbl{color:var(--gold)}
+.sl-opt.sel::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold)}
+.sl-desc{margin-top:13px;padding:12px 16px;background:var(--ink4);border-left:2px solid var(--gold);border-radius:0 2px 2px 0;font-size:13px;color:var(--fog);line-height:1.55;min-height:50px;transition:all .2s}
+
+/* Capital chips */
+.cap-chips{display:flex;gap:8px;flex-wrap:wrap}
+.cap-chip{background:var(--ink4);border:1px solid var(--ink5);border-radius:2px;padding:9px 16px;cursor:pointer;font-size:13px;color:var(--fog);transition:all .2s;white-space:nowrap}
+.cap-chip:hover{border-color:var(--gold-bd)}
+.cap-chip.sel{border-color:var(--gold);color:var(--gold-l);background:var(--gold-bg)}
+
+/* Right panel live */
+.live-lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);display:flex;align-items:center;gap:8px}
+.live-lbl::after{content:'';flex:1;height:1px;background:var(--ink5)}
+.live-card{background:var(--ink4);border:1px solid var(--ink5);border-radius:4px;padding:22px;transition:border-color .4s}
+.live-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border-radius:20px;border:1px solid;font-size:12px;font-weight:600;margin-bottom:15px;transition:all .4s}
+.live-pname{font-family:'Cormorant Garamond',serif;font-size:23px;margin-bottom:7px;transition:color .4s}
+.live-desc{font-size:12px;color:var(--fog);line-height:1.5;min-height:54px}
+.live-attrs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
+.attr-box{background:var(--ink3);border-radius:3px;padding:9px 11px}
+.attr-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:3px}
+.attr-val{font-size:13px;color:var(--smoke);font-weight:500}
+
+.bars-wrap{flex:1}
+.bar-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.bar-name{font-size:12px;color:var(--fog);min-width:116px}
+.bar-track{flex:1;height:5px;background:var(--ink5);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;background:var(--gold);transition:width .55s cubic-bezier(.4,0,.2,1)}
+.bar-pct{font-size:12px;color:var(--gold);min-width:30px;text-align:right;font-weight:500}
+.tasa-box{background:rgba(184,145,42,.07);border:1px solid var(--gold-bd);border-radius:3px;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;opacity:0;transition:opacity .5s}
+.tasa-box.show{opacity:1}
+.tasa-num{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold-l)}
+.tasa-meta{font-size:11px;color:var(--mist);text-align:right}
+.btn-calc{width:100%;padding:15px;background:var(--gold);border:none;border-radius:2px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--ink2);cursor:pointer;transition:all .2s;opacity:.3;pointer-events:none}
+.btn-calc.ready{opacity:1;pointer-events:all}
+.btn-calc.ready:hover{background:var(--gold-l)}
+
+/* ══ S2 RESULTS ══ */
+.res-header{display:grid;grid-template-columns:1fr auto;align-items:end;padding:34px 52px;border-bottom:1px solid var(--ink5);gap:20px}
+.rh-for{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--mist);margin-bottom:5px}
+.rh-client{font-family:'Cormorant Garamond',serif;font-size:34px;font-style:italic;color:var(--gold-l);margin-bottom:9px}
+.rh-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border-radius:20px;border:1px solid;font-size:12px;font-weight:600}
+.rh-right{text-align:right}
+.rh-tasa-lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:5px}
+.rh-tasa-num{font-family:'Cormorant Garamond',serif;font-size:58px;font-weight:300;color:var(--gold);line-height:1}
+.rh-tasa-sub{font-size:12px;color:var(--mist);margin-top:3px}
+
+.prof-tabs{display:flex;padding:0 52px;border-bottom:1px solid var(--ink5);background:var(--ink2)}
+.ptab{padding:13px 22px;background:none;border:none;font-family:'Outfit',sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mist);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.ptab:hover{color:var(--smoke)}
+.ptab.active{color:var(--gold-l);border-bottom-color:var(--gold)}
+
+.res-body{display:grid;grid-template-columns:1fr 390px;flex:1}
+.res-l{padding:38px 52px;border-right:1px solid var(--ink5);overflow-y:auto}
+.res-r{padding:34px 30px;background:var(--ink2);overflow-y:auto}
+
+/* Chart */
+.chart-wrap{width:100%;margin-bottom:22px}
+canvas#mainChart{width:100%!important}
+
+/* Headline */
+.hl-box{background:linear-gradient(135deg,rgba(184,145,42,.1),rgba(184,145,42,.04));border:1px solid var(--gold-bd);border-radius:4px;padding:22px 26px;margin-bottom:26px}
+.hl-lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:9px}
+.hl-txt{font-family:'Cormorant Garamond',serif;font-size:23px;color:var(--cream);line-height:1.35}
+.hl-txt em{font-style:italic;color:var(--gold-l)}
+
+/* Inputs row */
+.inputs-row{display:flex;gap:24px;margin-bottom:26px;flex-wrap:wrap;align-items:flex-end}
+.inp-grp{}
+.inp-lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:11px}
+.inp-row{display:flex;align-items:center;gap:8px}
+.inp-pre{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold)}
+.inp-f{background:var(--ink4);border:1px solid var(--ink5);border-radius:2px;padding:9px 13px;color:var(--parch);font-family:'Cormorant Garamond',serif;font-size:24px;width:170px;outline:none;transition:border-color .2s}
+.inp-f:focus{border-color:var(--gold)}
+.inp-unit{font-size:12px;color:var(--mist)}
+.ap-chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.ap-chip{background:var(--ink4);border:1px solid var(--ink5);border-radius:2px;padding:6px 11px;cursor:pointer;font-size:12px;color:var(--fog);transition:all .2s}
+.ap-chip:hover{border-color:var(--gold-bd)}
+.ap-chip.sel{border-color:var(--gold);color:var(--gold-l);background:var(--gold-bg)}
+
+/* Table */
+.comp-tbl{width:100%;border-collapse:collapse;margin-bottom:14px}
+.comp-tbl th{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);text-align:left;padding:7px 10px;border-bottom:1px solid var(--ink5)}
+.comp-tbl td{padding:12px 10px;border-bottom:1px solid rgba(42,39,24,.6);font-size:14px}
+.comp-tbl tr:last-child td{border-bottom:none}
+.sc-name{font-size:13px;color:var(--fog)}
+.sc-rate{font-size:11px;color:var(--mist);margin-top:2px}
+.vf{font-family:'Cormorant Garamond',serif;font-size:20px}
+.vg{font-size:13px;color:var(--fog)}
+.amg-row td{background:rgba(184,145,42,.05)}
+.amg-row .vf{color:var(--gold-l)}
+.amg-row .vg{color:var(--gold)}
+.tbl-note{font-size:11px;color:var(--mist);line-height:1.5;font-style:italic}
+
+/* Right: blocks */
+.r-lbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:17px;display:flex;align-items:center;gap:9px}
+.r-lbl::after{content:'';flex:1;height:1px;background:var(--ink5)}
+.block-list{display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+.b-item{display:flex;align-items:center;gap:13px;background:var(--ink3);border-radius:3px;padding:11px 15px;border-left:3px solid}
+.b-pct{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;min-width:46px}
+.b-info{flex:1}
+.b-name{font-size:13px;color:var(--smoke);font-weight:500;margin-bottom:2px}
+.b-tks{font-size:11px;color:var(--mist)}
+.b-rate{font-size:12px;color:var(--fog);min-width:36px;text-align:right}
+
+/* Costos colapsables */
+.costs-section{margin-bottom:18px}
+.costs-group{background:var(--ink3);border:1px solid var(--ink5);border-radius:3px;margin-bottom:8px;overflow:hidden}
+.cg-header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;user-select:none;transition:background .2s}
+.cg-header:hover{background:var(--ink4)}
+.cg-title{font-size:12px;font-weight:600;color:var(--smoke);display:flex;align-items:center;gap:8px}
+.cg-total{font-size:13px;color:var(--gold);font-weight:500}
+.cg-arrow{font-size:11px;color:var(--mist);transition:transform .25s}
+.cg-body{display:none;border-top:1px solid var(--ink5);padding:10px 14px}
+.cg-body.open{display:block}
+.costs-group.open .cg-arrow{transform:rotate(90deg)}
+.cost-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed rgba(42,39,24,.7);font-size:13px}
+.cost-row:last-child{border-bottom:none}
+.cr-n{color:var(--fog)}
+.cr-v{color:var(--smoke);font-weight:500}
+.costs-total{display:flex;justify-content:space-between;padding:12px 14px;background:rgba(184,145,42,.07);border:1px solid var(--gold-bd);border-radius:3px}
+.ct-lbl{font-size:12px;color:var(--smoke);text-transform:uppercase;letter-spacing:1px}
+.ct-val{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold-l)}
+
+/* Actions */
+.res-actions{padding:22px 52px;border-top:1px solid var(--ink5);display:flex;gap:13px;align-items:center;background:var(--ink2)}
+.btn-back{background:none;border:1px solid var(--ink5);color:var(--fog);padding:12px 24px;border-radius:2px;cursor:pointer;font-family:'Outfit',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:all .2s}
+.btn-back:hover{border-color:var(--mist);color:var(--smoke)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:960px){
+  #s1{flex-direction:column}
+  .cal-r{width:100%;height:auto;position:static}
+  .res-body{grid-template-columns:1fr}
+  .res-header{grid-template-columns:1fr}
+  .rh-right{text-align:left}
+  .res-l,.res-r,.res-actions,.res-header,.prof-tabs{padding-left:22px;padding-right:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ S0 ══ -->
+<div class="screen active" id="s0">
+  <div class="logo">AMG</div>
+  <div class="logo-tag">Strategic Investments · Powered by AI</div>
+  <h1 class="intro-h1">Tu arquitectura<br><em>patrimonial</em> en 5 preguntas</h1>
+  <p class="intro-p">Respondé y construimos juntos la estructura de inversión que refleja tu momento y objetivos.</p>
+  <div class="orn"><div class="orn-d"></div></div>
+  <div class="name-lbl">¿Con quién hablo hoy?</div>
+  <div class="name-wrap">
+    <input class="name-in" id="nameIn" type="text" placeholder="Tu nombre" autocomplete="off">
+  </div>
+  <button class="btn-start" onclick="startCalib()">Empecemos ◆</button>
+</div>
+
+<!-- ══ S1 ══ -->
+<div class="screen" id="s1">
+  <div class="cal-l">
+    <div class="eyebrow">Calibración de perfil</div>
+    <div class="cal-clientname" id="calName">—</div>
+
+    <!-- 00 País -->
+    <div class="q-block">
+      <div class="q-num">00 · País de operación</div>
+      <div class="q-title">¿Desde qué país operarás tu inversión?</div>
+      <div class="country-grid">
+        <div class="c-opt" onclick="selPais(this,'PE')"><span class="c-flag">🇵🇪</span>Perú</div>
+        <div class="c-opt" onclick="selPais(this,'CO')"><span class="c-flag">🇨🇴</span>Colombia</div>
+        <div class="c-opt" onclick="selPais(this,'MX')"><span class="c-flag">🇲🇽</span>México</div>
+        <div class="c-opt" onclick="selPais(this,'CL')"><span class="c-flag">🇨🇱</span>Chile</div>
+      </div>
+    </div>
+
+    <!-- 01 -->
+    <div class="q-block">
+      <div class="q-num">01 · Objetivo patrimonial</div>
+      <div class="q-title">¿Cuál es tu prioridad para tu excedente de capital en los próximos 5 a 10 años?</div>
+      <div class="sl-track" id="q1t">
+        <div class="sl-opt" onclick="selQ('q1',1,this)"><span class="sl-num">1</span><span class="sl-lbl">Proteger</span></div>
+        <div class="sl-opt" onclick="selQ('q1',2,this)"><span class="sl-num">2</span><span class="sl-lbl">Crecer</span></div>
+        <div class="sl-opt" onclick="selQ('q1',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Optimizar</span></div>
+        <div class="sl-opt" onclick="selQ('q1',4,this)"><span class="sl-num">4</span><span class="sl-lbl">Maximizar</span></div>
+      </div>
+      <div class="sl-desc" id="q1d">Seleccioná tu nivel de ambición patrimonial.</div>
+    </div>
+
+    <!-- 02 -->
+    <div class="q-block">
+      <div class="q-num">02 · Relación con la volatilidad</div>
+      <div class="q-title">¿Cómo te posicionás frente a las fluctuaciones naturales de la bolsa americana?</div>
+      <div class="sl-track" id="q2t">
+        <div class="sl-opt" onclick="selQ('q2',1,this)"><span class="sl-num">1</span><span class="sl-lbl">Conservar</span></div>
+        <div class="sl-opt" onclick="selQ('q2',2,this)"><span class="sl-num">2</span><span class="sl-lbl">Proactivo</span></div>
+        <div class="sl-opt" onclick="selQ('q2',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Analítico</span></div>
+        <div class="sl-opt" onclick="selQ('q2',4,this)"><span class="sl-num">4</span><span class="sl-lbl">Oportunidad</span></div>
+      </div>
+      <div class="sl-desc" id="q2d">Indicá cómo reaccionás ante una corrección del mercado.</div>
+    </div>
+
+    <!-- 03 -->
+    <div class="q-block">
+      <div class="q-num">03 · Arquitectura preferida</div>
+      <div class="q-title">¿Cómo preferís estructurar tus inversiones?</div>
+      <div class="sl-track" id="q3t">
+        <div class="sl-opt" onclick="selQ('q3',1,this)"><span class="sl-num">1</span><span class="sl-lbl">ETFs</span></div>
+        <div class="sl-opt" onclick="selQ('q3',2,this)"><span class="sl-num">2</span><span class="sl-lbl">Híbrido</span></div>
+        <div class="sl-opt" onclick="selQ('q3',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Estratégico</span></div>
+        <div class="sl-opt" onclick="selQ('q3',4,this)"><span class="sl-num">4</span><span class="sl-lbl">Líderes</span></div>
+      </div>
+      <div class="sl-desc" id="q3d">De fondos indexados a concentración directa en empresas líderes.</div>
+    </div>
+
+    <!-- 04 Capital -->
+    <div class="q-block">
+      <div class="q-num">04 · Capital inicial</div>
+      <div class="q-title">¿Con qué capital pensás arrancar?</div>
+      <div class="cap-chips">
+        <div class="cap-chip" onclick="selCap(this,'A',5000)">Hasta $5k</div>
+        <div class="cap-chip" onclick="selCap(this,'B',10000)">$5k – $10k</div>
+        <div class="cap-chip" onclick="selCap(this,'C',15000)">$10k – $20k</div>
+        <div class="cap-chip" onclick="selCap(this,'D',30000)">Más de $20k</div>
+      </div>
+    </div>
+
+    <!-- 05 Horizonte -->
+    <div class="q-block" style="border-bottom:none">
+      <div class="q-num">05 · Horizonte de inversión</div>
+      <div class="q-title">¿Por cuánto tiempo pensás mantener esta inversión?</div>
+      <div class="sl-track" id="q5t">
+        <div class="sl-opt" onclick="selQ('q5',1,this)"><span class="sl-num" style="font-size:17px">−2a</span><span class="sl-lbl">Liquidez</span></div>
+        <div class="sl-opt" onclick="selQ('q5',2,this)"><span class="sl-num" style="font-size:17px">3–5a</span><span class="sl-lbl">Moderado</span></div>
+        <div class="sl-opt" onclick="selQ('q5',3,this)"><span class="sl-num" style="font-size:17px">5–10a</span><span class="sl-lbl">Largo</span></div>
+        <div class="sl-opt" onclick="selQ('q5',4,this)"><span class="sl-num" style="font-size:17px">+10a</span><span class="sl-lbl">Compuesto</span></div>
+      </div>
+      <div class="sl-desc" id="q5d">El horizonte determina cuánto puede crecer tu arquitectura.</div>
+    </div>
+  </div><!-- /cal-l -->
+
+  <div class="cal-r">
+    <div class="live-lbl">Vista en tiempo real</div>
+    <div class="live-card" id="liveCard">
+      <div class="live-pill" id="lPill" style="background:rgba(106,100,64,.15);border-color:rgba(106,100,64,.4);color:var(--fog)">◆ Construyendo perfil</div>
+      <div class="live-pname" id="lName" style="color:var(--mist)">Respondé las preguntas</div>
+      <div class="live-desc" id="lDesc">El perfil se revela a medida que avanzás.</div>
+      <div class="live-attrs">
+        <div class="attr-box"><div class="attr-lbl">Capital</div><div class="attr-val" id="atrCap">—</div></div>
+        <div class="attr-box"><div class="attr-lbl">Empresas</div><div class="attr-val" id="atrEmp">—</div></div>
+        <div class="attr-box"><div class="attr-lbl">Horizonte</div><div class="attr-val" id="atrHor">—</div></div>
+        <div class="attr-box"><div class="attr-lbl">Puntaje</div><div class="attr-val" id="atrSco" style="color:var(--gold)">—</div></div>
+      </div>
+    </div>
+
+    <div class="bars-wrap">
+      <div class="live-lbl" style="margin-bottom:15px">Distribución preliminar</div>
+      <div class="bar-row"><span class="bar-name">Cimientos Core</span><div class="bar-track"><div class="bar-fill" id="b1f" style="width:0%"></div></div><span class="bar-pct" id="b1p">—</span></div>
+      <div class="bar-row"><span class="bar-name">Reserva &amp; Refugio</span><div class="bar-track"><div class="bar-fill" id="b2f" style="width:0%"></div></div><span class="bar-pct" id="b2p">—</span></div>
+      <div class="bar-row"><span class="bar-name">Titanes Digitales</span><div class="bar-track"><div class="bar-fill" id="b3f" style="width:0%"></div></div><span class="bar-pct" id="b3p">—</span></div>
+      <div class="bar-row"><span class="bar-name">Recursos &amp; Futuro</span><div class="bar-track"><div class="bar-fill" id="b4f" style="width:0%"></div></div><span class="bar-pct" id="b4p">—</span></div>
+      <div class="bar-row"><span class="bar-name">IA &amp; Infraestructura</span><div class="bar-track"><div class="bar-fill" id="b5f" style="width:0%"></div></div><span class="bar-pct" id="b5p">—</span></div>
+      <div class="bar-row"><span class="bar-name">Motores Emergentes</span><div class="bar-track"><div class="bar-fill" id="b6f" style="width:0%"></div></div><span class="bar-pct" id="b6p">—</span></div>
+      <div class="tasa-box" id="tasaBox">
+        <div><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mist);margin-bottom:4px">Tasa AMG estimada</div><div class="tasa-num" id="liveTasa">—</div></div>
+        <div class="tasa-meta">anual<br>bruta</div>
+      </div>
+    </div>
+    <button class="btn-calc" id="btnCalc" onclick="goResults()">Ver tu arquitectura →</button>
+  </div>
+</div><!-- /s1 -->
+
+<!-- ══ S2 ══ -->
+<div class="screen" id="s2">
+  <div class="res-header">
+    <div>
+      <div class="rh-for">Arquitectura personalizada para</div>
+      <div class="rh-client" id="rhClient">—</div>
+      <div class="rh-badge" id="rhBadge"></div>
+    </div>
+    <div class="rh-right">
+      <div class="rh-tasa-lbl">Tasa AMG bruta</div>
+      <div class="rh-tasa-num" id="rhTasa">—%</div>
+      <div class="rh-tasa-sub" id="rhTasaNet">—% neta estimada / año</div>
+    </div>
+  </div>
+
+  <div class="prof-tabs" id="profTabs">
+    <button class="ptab" onclick="switchProf('conservador')">Conservador</button>
+    <button class="ptab" onclick="switchProf('moderado')">Moderado</button>
+    <button class="ptab" onclick="switchProf('crecimiento')">Crecimiento</button>
+    <button class="ptab" onclick="switchProf('estrategico')">Estratégico</button>
+  </div>
+
+  <div class="res-body">
+    <div class="res-l" id="resL">
+      <div class="chart-wrap"><canvas id="mainChart" height="230"></canvas></div>
+      <div class="hl-box">
+        <div class="hl-lbl">Lo que esto significa para vos</div>
+        <div class="hl-txt" id="hlTxt">—</div>
+      </div>
+      <div class="inputs-row">
+        <div class="inp-grp">
+          <div class="inp-lbl">Capital inicial</div>
+          <div class="inp-row">
+            <span class="inp-pre">$</span>
+            <input class="inp-f" id="capIn" type="number" value="15000" min="500" step="500" oninput="updateAll()">
+            <span class="inp-unit">USD</span>
+          </div>
+        </div>
+        <div class="inp-grp">
+          <div class="inp-lbl">Aporte mensual</div>
+          <div class="ap-chips" id="apChips">
+            <div class="ap-chip sel" onclick="selAp(this,0)">Sin aportes</div>
+            <div class="ap-chip" onclick="selAp(this,300)">$300/mes</div>
+            <div class="ap-chip" onclick="selAp(this,700)">$700/mes</div>
+            <div class="ap-chip" onclick="selAp(this,1500)">$1.500/mes</div>
+          </div>
+        </div>
+      </div>
+
+      <table class="comp-tbl">
+        <thead><tr><th>Escenario</th><th>Tasa anual</th><th>Ganancia a 5 años</th><th>Valor final</th></tr></thead>
+        <tbody id="tblBody"></tbody>
+      </table>
+      <div class="tbl-note" id="tblNote"></div>
+    </div>
+
+    <div class="res-r">
+      <div class="r-lbl">Distribución en bloques</div>
+      <div class="block-list" id="blockList"></div>
+
+      <div class="r-lbl" style="margin-top:4px">Costos acumulados a 5 años</div>
+      <div class="costs-section" id="costsSection"></div>
+
+      <!-- Agenda CTA -->
+      <div style="margin-top:20px;background:rgba(184,145,42,.07);border:1px solid rgba(184,145,42,.25);border-radius:4px;padding:18px 16px">
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:8px">¿Te interesa esta arquitectura?</div>
+        <div style="font-size:13px;color:var(--smoke);line-height:1.55;margin-bottom:14px">Agendemos 30 minutos para calibrar tu portafolio con datos reales y resolver tus dudas.</div>
+        <a href="https://calendar.app.google/yT4R6TkANQEUGsVC6" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;justify-content:center;gap:9px;background:var(--gold);color:var(--ink2);padding:13px 16px;border-radius:2px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:background .2s"
+           onmouseover="this.style.background='#D4AE52'" onmouseout="this.style.background='var(--gold)'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+            <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Agendar sesión de calibración
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="res-actions">
+    <button class="btn-back" onclick="goBack()">← Recalibrar</button>
+  </div>
+</div>
+
+<!-- ════ DATA & LOGIC ════ -->
+<script>
+// ══════════════════════════════════════════════════════
+// CONFIG — Fuente única de verdad. Futura web admin
+//          leerá y escribirá este objeto vía API/JSON.
+// ══════════════════════════════════════════════════════
+const CONFIG = {
+
+  // ── Meta ──────────────────────────────────────────
+  version: '3.1',
+  lastUpdated: '2026-06',
+
+  // ── Umbrales de capital (USD) ──────────────────────
+  // Determinan cuántos módulos se asignan
+  capitalThresholds: {
+    tier1Max: 8000,   // < $8k  → 2 módulos, 8 tickers
+    tier2Max: 13000,  // < $13k → 3 módulos, 12 tickers
+    // ≥ $13k → 4 módulos, 16 tickers
+  },
+
+  // ── Opciones de capital mostradas al cliente ───────
+  capitalOptions: [
+    { label: 'Hasta $5k',    internalMid: 5000  },
+    { label: '$5k – $10k',   internalMid: 10000 },
+    { label: '$10k – $20k',  internalMid: 15000 },
+    { label: 'Más de $20k',  internalMid: 30000 },
+  ],
+
+  // ── Opciones de horizonte ──────────────────────────
+  horizonOptions: [
+    { label: 'Menos de 2 años', sliderLabel: '−2a', sublabel: 'Liquidez'  },
+    { label: '3 a 5 años',      sliderLabel: '3–5a', sublabel: 'Moderado' },
+    { label: '5 a 10 años',     sliderLabel: '5–10a', sublabel: 'Largo'   },
+    { label: 'Más de 10 años',  sliderLabel: '+10a',  sublabel: 'Compuesto'},
+  ],
+
+  // ── Aportes mensuales ─────────────────────────────
+  aporteOptions: [
+    { label: 'Sin aportes', value: 0    },
+    { label: '$300/mes',    value: 300  },
+    { label: '$700/mes',    value: 700  },
+    { label: '$1.500/mes',  value: 1500 },
+  ],
+
+  // ── Países / Broker Hapi ──────────────────────────
+  paises: {
+    PE: { label: 'Perú',     flag: '🇵🇪', hapiMin: 1.99, hapiPct: 0.009,  taxGain: 0.15 },
+    CO: { label: 'Colombia', flag: '🇨🇴', hapiMin: 2.99, hapiPct: 0.0065, taxGain: 0.15 },
+    MX: { label: 'México',   flag: '🇲🇽', hapiMin: 2.99, hapiPct: 0.0045, taxGain: 0.10 },
+    CL: { label: 'Chile',    flag: '🇨🇱', hapiMin: 2.99, hapiPct: 0.0055, taxGain: 0.00 },
+  },
+
+  // ── Supuestos de rendimiento por bloque ───────────
+  // Rendimiento histórico estimado anual bruto
+  blockRates: [0.12, 0.10, 0.16, 0.14, 0.18, 0.16],
+  blockNames: [
+    'Cimientos Core',
+    'Reserva & Refugio',
+    'Titanes Digitales',
+    'Recursos & Futuro',
+    'IA & Infraestructura',
+    'Motores Emergentes',
+  ],
+  blockColors: ['#4A9B7F','#7A8B6A','#4A7FB5','#8B6BB5','#B8912A','#B56B4A'],
+
+  // ── Tickers por bloque ────────────────────────────
+  // Orden = prioridad. Los primeros N se usan según módulos activos.
+  blockTickers: [
+    ['KO','WMT','JNJ','ADP','JPM','V','MA','AXP'],          // B1
+    ['GLD','BND','AGG','TIP','BRK-B','COST'],               // B2
+    ['AAPL','MSFT','GOOG','META','AMZN'],                   // B3
+    ['SCCO','XOM','LIN','NEE','LTM','MERCK'],               // B4
+    ['NVDA','TSM','ASML','AVGO'],                           // B5
+    ['MELI','SHOP','GRAB'],                                 // B6
+  ],
+
+  // ── Honorarios AMG ────────────────────────────────
+  amg: {
+    moduleCost: 130,          // USD por módulo (pago único)
+    pilotByTier: [24, 29, 34] // USD/mes según tier 1, 2, 3
+  },
+
+  // ── Impuesto dividendos USA ───────────────────────
+  usDividendYield:  0.0045,   // 0.45% del capital
+  usDividendTaxRate: 0.18,    // 18% sobre dividendos
+
+  // ── Perfiles de inversión ─────────────────────────
+  // dist: array de 3 distribuciones [tier1, tier2, tier3]
+  // Cada distribución = array de 6 pesos (B1–B6), suma = 1.00
+  // target: tasa objetivo usada solo como referencia
+  profiles: {
+
+    conservador: {
+      name:   'Conservador',
+      color:  '#4A9B7F',
+      target: 12.50,
+      desc:   'Capital con protección activa. Prioriza la preservación del poder adquisitivo con exposición controlada. Volatilidad mínima, horizonte flexible.',
+      dist: [
+        // Tier 1 — 2M · 8 tickers · capital < $8k
+        [0.50, 0.20, 0.20, 0.10, 0.00, 0.00],  // tasa: 12.60%
+        // Tier 2 — 3M · 12 tickers · $8k–$13k
+        [0.40, 0.20, 0.20, 0.20, 0.00, 0.00],  // tasa: 12.80%
+        // Tier 3 — 4M · 16 tickers · ≥ $13k
+        [0.40, 0.30, 0.10, 0.10, 0.05, 0.05],  // tasa: 12.50% (exacto)
+      ],
+    },
+
+    moderado: {
+      name:   'Moderado',
+      color:  '#4A7FB5',
+      target: 13.70,
+      desc:   'Equilibrio entre protección y crecimiento. Exposición selectiva a líderes sectoriales con base estructural sólida. El perfil más frecuente en la red HISPAM.',
+      dist: [
+        // Tier 1 — 2M
+        [0.50, 0.05, 0.35, 0.00, 0.10, 0.00],  // tasa: 13.90%
+        // Tier 2 — 3M
+        [0.50, 0.05, 0.35, 0.05, 0.05, 0.00],  // tasa: 13.70% (exacto)
+        // Tier 3 — 4M
+        [0.25, 0.20, 0.20, 0.15, 0.10, 0.10],  // tasa: 13.70% (exacto)
+      ],
+    },
+
+    crecimiento: {
+      name:   'Crecimiento',
+      color:  '#B8912A',
+      target: 15.10,
+      desc:   'Arquitectura orientada a valoración sostenida. Concentración en Titanes Digitales e IA con base de estabilidad. El perfil estándar de exejecutivos HISPAM.',
+      dist: [
+        // Tier 1 — 2M
+        [0.35, 0.03, 0.55, 0.00, 0.07, 0.00],  // tasa: 14.56%
+        // Tier 2 — 3M
+        [0.25, 0.05, 0.45, 0.05, 0.20, 0.00],  // tasa: 15.00%
+        // Tier 3 — 4M
+        [0.15, 0.05, 0.25, 0.20, 0.20, 0.15],  // tasa: 15.10% (exacto)
+      ],
+    },
+
+    estrategico: {
+      name:   'Estratégico',
+      color:  '#7B5EA7',
+      target: 16.18,
+      desc:   'Alta concentración en crecimiento estructural. IA, semiconductores y tecnología como motor principal. Requiere tolerancia a correcciones de corto plazo.',
+      dist: [
+        // Tier 1 — 2M
+        [0.10, 0.00, 0.60, 0.00, 0.30, 0.00],  // tasa: 16.20%
+        // Tier 2 — 3M
+        [0.10, 0.00, 0.45, 0.05, 0.35, 0.05],  // tasa: 16.20%
+        // Tier 3 — 4M
+        [0.05, 0.03, 0.15, 0.12, 0.40, 0.25],  // tasa: 16.18% (exacto)
+      ],
+    },
+
+  }, // end profiles
+
+  // ── Lógica de scoring → perfil ────────────────────
+  // Suma de Q1+Q2+Q3, cada una de 1 a 4 (rango total: 3–12)
+  scoreThresholds: {
+    conservador: 6,   // score ≤ 6
+    moderado:    9,   // score ≤ 9
+    crecimiento: 12,  // score ≤ 12
+    // else → estrategico
+  },
+
+  // ── Benchmarks para proyección ────────────────────
+  benchmarks: [
+    { label: 'Ahorro tradicional', sublabel: 'Depósito bancario',    rate: 0.040, isAmg: false },
+    { label: 'S&P 500',            sublabel: 'Fondo indexado global', rate: 0.105, isAmg: false },
+    // AMG se agrega dinámicamente con la tasa calculada
+  ],
+
+}; // end CONFIG
+
+// ── Aliases para compatibilidad con funciones existentes ──
+const BN = CONFIG.blockNames;
+const BR = CONFIG.blockRates;
+const BC = CONFIG.blockColors;
+const PROFS = Object.fromEntries(
+  Object.entries(CONFIG.profiles).map(([k,v]) => [k, {
+    name: v.name, color: v.color, desc: v.desc,
+    dist: v.dist,
+    tks:  CONFIG.blockTickers,
+  }])
+);
+const HAPI = Object.fromEntries(
+  Object.entries(CONFIG.paises).map(([k,v]) => [k, {
+    min: v.hapiMin, pct: v.hapiPct, tax_gain: v.taxGain, label: v.label
+  }])
+);
+
+const QDESC = {
+  q1:['Empatar o superar levemente la inflación — baja volatilidad, capital protegido.',
+      'Superar claramente los instrumentos tradicionales aceptando fluctuaciones moderadas.',
+      'Valoración importante mediante selección estratégica, asumiendo la volatilidad del mercado.',
+      'Expansión acelerada a largo plazo — rendimiento compuesto, captura de oportunidades de alto impacto.'],
+  q2:['Prefiero carteras diversificadas que suavicen las caídas — permanencia sobre rendimiento.',
+      'Veo la volatilidad como parte necesaria del crecimiento y oportunidad para validar mi tesis.',
+      'Acepto variaciones negativas temporales si los activos son de buena calidad.',
+      'Las correcciones son ventanas para incrementar posiciones en líderes a precios descontados.'],
+  q3:['ETFs que replican el mercado — diversificación máxima sobre retorno individual.',
+      'Base de fondos indexados con participación mínima en empresas de alta capitalización.',
+      'Núcleo en fondos/metales + selección directa de Titanes (Apple, Visa, Nvidia…).',
+      'Concentración en empresas que dominan la economía global — sin dilución de cartera.'],
+  q5:['Menos de 2 años — prioridad en liquidez y preservación.',
+      '3 a 5 años — crecimiento moderado con visibilidad de resultados.',
+      '5 a 10 años — visión de largo plazo y capitalización compuesta.',
+      'Más de 10 años — interés compuesto puro, máxima capitalización temporal.']
+};
+
+
+// ── STATE ─────────────────────────────────────────────
+const S={name:'',country:'PE',q1:0,q2:0,q3:0,q5:0,capMid:15000,score:0,prof:'crecimiento',capital:15000,aporte:0};
+
+// ── HELPERS ───────────────────────────────────────────
+// ── HELPERS — todos leen de CONFIG ───────────────────
+const t1 = CONFIG.capitalThresholds.tier1Max;  // 8000
+const t2 = CONFIG.capitalThresholds.tier2Max;  // 13000
+
+const di       = cap => cap < t1 ? 0 : cap < t2 ? 1 : 2;
+const mods     = cap => cap < t1 ? 2 : cap < t2 ? 3 : 4;
+const empresas = cap => cap < t1 ? 8 : cap < t2 ? 12 : 16;
+const tasa     = (pk, cap) => PROFS[pk].dist[di(cap)].reduce((s,w,i) => s + w * BR[i], 0);
+const fmt      = v => '$' + Math.round(v).toLocaleString('es-419');
+const proj     = (cap, r, ap, y) => {
+  const d = [cap]; let v = cap;
+  for (let i = 1; i <= y; i++) { v = v*(1+r) + ap*12; d.push(Math.round(v)); }
+  return d;
+};
+const scoreToProf = s => {
+  const th = CONFIG.scoreThresholds;
+  if (s <= th.conservador) return 'conservador';
+  if (s <= th.moderado)    return 'moderado';
+  if (s <= th.crecimiento) return 'crecimiento';
+  return 'estrategico';
+};
+
+// Retorna los tickers que corresponden a un bloque según cuántos
+// tickers ACTIVOS tiene ese bloque en la distribución del tier actual.
+// Lógica: bloques activos = bloques con peso > 0.
+// Distribuye los N tickers totales del tier proporcional a los pesos,
+// con mínimo 1 ticker por bloque activo.
+function tickersForDist(dist) {
+  const totalTickers = empresas(S.capital || 15000);
+  const activeIdx = dist.map((w,i) => w > 0 ? i : -1).filter(i => i >= 0);
+  const nActive = activeIdx.length;
+  if (nActive === 0) return dist.map(() => []);
+
+  // Asignar tickers proporcionalmente (mín 1 por bloque activo)
+  const result = dist.map(() => []);
+  let remaining = totalTickers;
+  // Paso 1: 1 ticker garantizado por bloque activo
+  activeIdx.forEach(i => { result[i] = [CONFIG.blockTickers[i][0]]; remaining--; });
+  // Paso 2: distribuir el resto por peso relativo
+  const totalWeight = activeIdx.reduce((s,i) => s + dist[i], 0);
+  const extra = activeIdx.map(i => ({ i, extra: Math.floor(dist[i]/totalWeight * remaining) }));
+  extra.forEach(({i, extra: e}) => {
+    const pool = CONFIG.blockTickers[i];
+    for (let k = 1; k <= e && k < pool.length; k++) result[i].push(pool[k]);
+  });
+  return result;
+}
+
+const HORIZONTE_LBL = ['','Menos de 2 años','3 a 5 años','5 a 10 años','Más de 10 años'];
+let capTier = 'D';
+
+function costos(cap, pk, country) {
+  const h    = HAPI[country] || HAPI.PE;
+  const mod  = mods(cap);
+  const amg  = CONFIG.amg;
+
+  // Broker: depósito + transacciones
+  const dep  = Math.max(cap * h.pct, h.min);
+  const nBuys = cap >= t1 ? Math.ceil(cap/500) : Math.ceil(cap/250);
+  const tx   = nBuys * 0.15;
+
+  // Impuestos
+  const divTax  = cap * CONFIG.usDividendYield * CONFIG.usDividendTaxRate * 5;
+  const tb      = tasa(pk, cap);
+  const g5      = cap * (Math.pow(1 + tb, 5) - 1);
+  const locTax  = g5 * h.tax_gain;
+
+  // Honorarios AMG
+  const amgMod  = mod * amg.moduleCost;
+  const pilotM  = amg.pilotByTier[di(cap)];
+  const pilot   = pilotM * 12 * 5;
+
+  const total   = dep + tx + divTax + locTax + amgMod + pilot;
+  const netRate = tb - total / (cap * 5);
+
+  return { dep, tx, divTax, locTax, amgMod, pilot, total, netRate, tb,
+           nBuys, mod, g5, h, pilotM };
+}
+
+// ── SCREENS ───────────────────────────────────────────
+const show=id=>{document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);};
+
+function startCalib(){S.name=document.getElementById('nameIn').value.trim()||'Inversor';document.getElementById('calName').textContent=S.name;show('s1');}
+function goBack(){show('s1');}
+function goResults(){S.capital=S.capMid;document.getElementById('capIn').value=S.capital;renderResults();show('s2');}
+
+// ── CALIBRATOR ────────────────────────────────────────
+function selPais(el,code){document.querySelectorAll('.c-opt').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');S.country=code;recompute();}
+function selQ(q,v,el){document.getElementById(q+'t').querySelectorAll('.sl-opt').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');S[q]=v;const d=QDESC[q];if(d)document.getElementById(q+'d').textContent=d[v-1];recompute();}
+function selCap(el,tier,mid){document.querySelectorAll('.cap-chip').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');capTier=tier;S.capMid=mid;recompute();}
+function selAp(el,v){document.querySelectorAll('#apChips .ap-chip').forEach(e=>e.classList.remove('sel'));el.classList.add('sel');S.aporte=v;updateAll();}
+
+function recompute(){
+  const sc=(S.q1||0)+(S.q2||0)+(S.q3||0);
+  S.score=sc;
+  const pk=sc>=3?scoreToProf(sc):'crecimiento';
+  S.prof=pk;
+  const p=PROFS[pk];
+
+  // attrs
+  document.getElementById('atrCap').textContent=S.capMid?fmt(S.capMid):'—';
+  document.getElementById('atrEmp').textContent=S.capMid?empresas(S.capMid)+' empresas':'—';
+  document.getElementById('atrHor').textContent=S.q5?HORIZONTE_LBL[S.q5]:'—';
+  document.getElementById('atrSco').textContent=sc>0?sc+' / 12':'—';
+
+  // pill
+  const pill=document.getElementById('lPill');
+  pill.style.background=p.color+'22';pill.style.borderColor=p.color+'55';pill.style.color=p.color;
+  pill.textContent='◆ '+p.name;
+  document.getElementById('lName').style.color=p.color;
+  document.getElementById('lName').textContent=p.name;
+  document.getElementById('lDesc').textContent=p.desc;
+
+  // bars
+  const cap=S.capMid||15000;
+  const dist=p.dist[di(cap)];
+  dist.forEach((w,i)=>{
+    document.getElementById('b'+(i+1)+'f').style.width=(w*100)+'%';
+    document.getElementById('b'+(i+1)+'p').textContent=w>0?(w*100)+'%':'—';
+  });
+
+  // tasa
+  if(sc>=3){
+    const t=tasa(pk,cap);
+    document.getElementById('tasaBox').classList.add('show');
+    document.getElementById('liveTasa').textContent=(t*100).toFixed(2)+'%';
+  }
+
+  const done=S.q1&&S.q2&&S.q3&&S.capMid&&S.q5&&S.country;
+  document.getElementById('btnCalc').classList.toggle('ready',!!done);
+}
+
+// ── RESULTS ───────────────────────────────────────────
+let chart=null;
+
+function renderResults(){
+  const pk=S.prof;
+  renderHeader(pk);
+  activateTab(pk);
+  updateAll();
+}
+
+function renderHeader(pk){
+  const p=PROFS[pk];
+  document.getElementById('rhClient').textContent=S.name;
+  const b=document.getElementById('rhBadge');
+  b.style.background=p.color+'22';b.style.borderColor=p.color+'55';b.style.color=p.color;
+  b.textContent='◆ Perfil '+p.name;
+}
+
+function activateTab(pk){
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  const order=['conservador','moderado','crecimiento','estrategico'];
+  const tabs=document.querySelectorAll('.ptab');
+  const i=order.indexOf(pk);
+  if(tabs[i])tabs[i].classList.add('active');
+}
+
+function switchProf(pk){S.prof=pk;renderHeader(pk);activateTab(pk);updateAll();}
+
+function updateAll(){
+  const cap=parseFloat(document.getElementById('capIn').value)||15000;
+  S.capital=cap;
+  const ap=S.aporte,pk=S.prof;
+  const p=PROFS[pk];
+  const tb=tasa(pk,cap);
+  const c=costos(cap,pk,S.country);
+
+  // header tasa neta
+  document.getElementById('rhTasa').textContent=(tb*100).toFixed(2)+'%';
+  document.getElementById('rhTasaNet').textContent=(c.netRate*100).toFixed(2)+'% neta estimada / año';
+
+  // ── CHART ──
+  const labels=['Hoy','Año 1','Año 2','Año 3','Año 4','Año 5'];
+  const dA=proj(cap,.04,ap,5);
+  const dS=proj(cap,.105,ap,5);
+  const dM=proj(cap,tb,ap,5);
+
+  // Build baseline array that represents "zero growth" = just contributions
+  // For the red fill under ahorro = show depreciation relative to purchasing power
+  const dBase=proj(cap,.04,ap,5); // same as ahorro for fill reference
+
+  if(chart)chart.destroy();
+  const ctx=document.getElementById('mainChart').getContext('2d');
+  chart=new Chart(ctx,{
+    type:'line',
+    data:{
+      labels,
+      datasets:[
+        {
+          label:'Ahorro tradicional (4%)',
+          data:dA,
+          borderColor:'rgba(140,55,40,.75)',
+          borderWidth:1.5,
+          pointRadius:3,
+          pointBackgroundColor:'rgba(140,55,40,.75)',
+          tension:.3,
+          backgroundColor:'rgba(120,40,30,.18)',
+          fill:'origin',
+          order:3
+        },
+        {
+          label:'S&P 500 (10.5%)',
+          data:dS,
+          borderColor:'rgba(74,127,181,.8)',
+          borderWidth:1.5,
+          pointRadius:3,
+          pointBackgroundColor:'rgba(74,127,181,.8)',
+          tension:.3,
+          backgroundColor:'transparent',
+          fill:false,
+          order:2
+        },
+        {
+          label:'Estrategia AMG',
+          data:dM,
+          borderColor:'#B8912A',
+          borderWidth:2.5,
+          pointRadius:4,
+          pointBackgroundColor:'#B8912A',
+          tension:.3,
+          backgroundColor:'rgba(184,145,42,.1)',
+          fill:'origin',
+          order:1
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{position:'top',labels:{color:'#948E66',boxWidth:14,padding:18,font:{size:12}}},
+        tooltip:{
+          mode:'index',
+          intersect:false,
+          callbacks:{
+            label:ctx=>' '+ctx.dataset.label+': '+fmt(ctx.raw)
+          }
+        }
+      },
+      scales:{
+        x:{ticks:{color:'#6A6440',font:{size:11}},grid:{color:'rgba(42,39,24,.5)'}},
+        y:{ticks:{color:'#6A6440',font:{size:11},callback:v=>'$'+(v>=1000?(v/1000).toFixed(0)+'k':v)},grid:{color:'rgba(42,39,24,.5)'}}
+      }
+    }
+  });
+
+  // ── HEADLINE ──
+  const surplus=dM[5]-dA[5];
+  document.getElementById('hlTxt').innerHTML=
+    `En 5 años, la diferencia entre AMG y el ahorro tradicional es <em>${fmt(surplus)}</em> — dinero que trabaja con criterio, no que duerme en el banco.`;
+
+  // ── TABLE ── (4 cols: Escenario | Tasa anual | Ganancia | Valor final)
+  const totalAp=ap*12*5;
+  const tbody=document.getElementById('tblBody');
+  tbody.innerHTML='';
+  [
+    {name:'Ahorro tradicional',sub:'Depósito bancario',rate:.04,data:dA,amg:false},
+    {name:'S&P 500',sub:'Fondo indexado global',rate:.105,data:dS,amg:false},
+    {name:'Estrategia AMG',sub:'Arquitectura personalizada',rate:tb,data:dM,amg:true},
+  ].forEach(sc=>{
+    const vf=sc.data[5];
+    const vg=vf-cap-totalAp;
+    tbody.innerHTML+=`
+      <tr${sc.amg?' class="amg-row"':''}>
+        <td><div class="sc-name">${sc.name}</div><div class="sc-rate">${sc.sub}</div></td>
+        <td>${(sc.rate*100).toFixed(1)}%</td>
+        <td><span class="${sc.amg?'vg amg-row':''}">${fmt(vg)}</span></td>
+        <td><span class="vf">${fmt(vf)}</span></td>
+      </tr>`;
+  });
+  document.getElementById('tblNote').textContent=
+    `* AMG incluye costos de broker Hapi (${HAPI[S.country].label}), impuestos locales y honorarios AMG. Ver desglose abajo.`;
+
+  // ── BLOCKS ──
+  const distArr=p.dist[di(cap)];
+  const tksForDist=tickersForDist(distArr);
+  const bl=document.getElementById('blockList');
+  bl.innerHTML='';
+  distArr.forEach((w,i)=>{
+    if(!w)return;
+    const tks=tksForDist[i].join(', ');
+    bl.innerHTML+=`
+      <div class="b-item" style="border-left-color:${BC[i]}">
+        <div class="b-pct" style="color:${BC[i]}">${Math.round(w*100)}%</div>
+        <div class="b-info">
+          <div class="b-name">B${i+1} · ${BN[i]}</div>
+          <div class="b-tks">${tks}</div>
+        </div>
+        <div class="b-rate">${(BR[i]*100).toFixed(0)}%</div>
+      </div>`;
+  });
+
+  // ── COSTOS COLAPSABLES ──
+  renderCostos(c);
+}
+
+function renderCostos(c){
+  const s=document.getElementById('costsSection');
+  const brokerT=c.dep+c.tx;
+  const taxT=c.divTax+c.locTax;
+  const amgT=c.amgMod+c.pilot;
+
+  s.innerHTML=`
+    <div class="costs-group" id="cg-broker">
+      <div class="cg-header" onclick="toggleGroup('cg-broker')">
+        <span class="cg-title">🏦 Costos Broker · Hapi</span>
+        <span style="display:flex;align-items:center;gap:10px"><span class="cg-total">${fmt(brokerT)}</span><span class="cg-arrow">›</span></span>
+      </div>
+      <div class="cg-body" id="cg-broker-b">
+        <div class="cost-row"><span class="cr-n">Comisión fondeo (${(c.h.pct*100).toFixed(2)}%, mín. $${c.h.min})</span><span class="cr-v">${fmt(c.dep)}</span></div>
+        <div class="cost-row"><span class="cr-n">Transacciones (${c.nBuys} compras × $0.15)</span><span class="cr-v">${fmt(c.tx)}</span></div>
+      </div>
+    </div>
+    <div class="costs-group" id="cg-tax">
+      <div class="cg-header" onclick="toggleGroup('cg-tax')">
+        <span class="cg-title">🏛️ Impuestos &amp; Costos Regulatorios</span>
+        <span style="display:flex;align-items:center;gap:10px"><span class="cg-total">${fmt(taxT)}</span><span class="cg-arrow">›</span></span>
+      </div>
+      <div class="cg-body" id="cg-tax-b">
+        <div class="cost-row"><span class="cr-n">Dividendos USA (cap × 0.45% × 18% × 5a)</span><span class="cr-v">${fmt(c.divTax)}</span></div>
+        <div class="cost-row"><span class="cr-n">Ganancias locales ${c.h.label} (${(c.h.tax_gain*100).toFixed(0)}% sobre ganancia)</span><span class="cr-v">${fmt(c.locTax)}</span></div>
+      </div>
+    </div>
+    <div class="costs-group" id="cg-amg">
+      <div class="cg-header" onclick="toggleGroup('cg-amg')">
+        <span class="cg-title">◆ Honorarios AMG</span>
+        <span style="display:flex;align-items:center;gap:10px"><span class="cg-total">${fmt(amgT)}</span><span class="cg-arrow">›</span></span>
+      </div>
+      <div class="cg-body" id="cg-amg-b">
+        <div class="cost-row"><span class="cr-n">Módulos de inversión (${c.mod} × $130)</span><span class="cr-v">${fmt(c.amgMod)}</span></div>
+        <div class="cost-row"><span class="cr-n">AMG Pilot ($${c.pilotM}/mes × 60 meses)</span><span class="cr-v">${fmt(c.pilot)}</span></div>
+      </div>
+    </div>
+    <div class="costs-total">
+      <span class="ct-lbl">Total costos a 5 años</span>
+      <span class="ct-val">${fmt(c.total)}</span>
+    </div>`;
+}
+
+function toggleGroup(id){
+  const g=document.getElementById(id);
+  const b=document.getElementById(id+'-b');
+  const open=b.classList.toggle('open');
+  g.classList.toggle('open',open);
+}
+
+// ── ENTER on name ─────────────────────────────────────
+document.getElementById('nameIn').addEventListener('keydown',e=>{if(e.key==='Enter')startCalib();});
+</script>
+</body>
+</html>
