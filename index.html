@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMG Strategic Investments — Tu capital, con criterio y claridad</title>
+<meta name="description" content="Arquitectura patrimonial para el ejecutivo LATAM que se reinventa. Acompañamiento y método para que tu capital crezca con criterio, sin que tengas que volverte experto en bolsa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   AMG · Index v0  ·  Sistema de marca v1.0
+   Tokens oficiales — ver Documento de Marca
+   ============================================================ */
+:root{
+  --cream:#F4F1EA;
+  --ink:#1C1C1A;
+  --body:#2C2C2C;
+  --plomo:#7F7F7F;
+  --gold:#C49849;
+  --gold-l:#D4AA52;
+  --dark:#111110;
+  --green:#2C8C2C;
+  --red:#CC2222;
+  --line:rgba(28,28,26,.12);
+  --line-gold:rgba(196,152,73,.35);
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Instrument Sans',-apple-system,system-ui,sans-serif;
+  --maxw:1080px;
+  --pad:clamp(1.25rem,5vw,2.5rem);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--cream);
+  color:var(--body);
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  font-size:clamp(1rem,1rem + .2vw,1.08rem);
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ---------- shared ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.section{padding:clamp(3.5rem,9vw,7rem) 0}
+.eyebrow{
+  font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.1rem;display:flex;align-items:center;gap:.6rem;
+}
+.eyebrow::before{content:"";width:1.6rem;height:1px;background:var(--gold)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;color:var(--ink);line-height:1.1;letter-spacing:-.01em}
+h2.title{font-size:clamp(1.75rem,4.2vw,2.7rem);margin-bottom:1.2rem;max-width:18ch}
+p.lead{font-size:clamp(1.08rem,1.4vw,1.25rem);color:var(--body);max-width:60ch}
+.muted{color:var(--plomo)}
+.gold{color:var(--gold)}
+em,.it{font-style:italic}
+
+/* ---------- header ---------- */
+.hdr{
+  position:sticky;top:0;z-index:50;
+  background:rgba(244,241,234,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:.85rem;padding-bottom:.85rem}
+.brand{display:flex;align-items:center;gap:.6rem}
+.brand svg{width:34px;height:30px;flex:none}
+.brand .bt{font-family:var(--serif);font-size:1.15rem;color:var(--ink);letter-spacing:.02em;line-height:1}
+.brand .bs{font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:var(--plomo);margin-top:2px}
+.hdr nav{display:flex;align-items:center;gap:1.6rem}
+.hdr nav a.navlink{font-size:.85rem;color:var(--body);transition:color .2s}
+.hdr nav a.navlink:hover{color:var(--gold)}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;font-family:var(--sans);font-size:.9rem;font-weight:500;
+  padding:.62rem 1.15rem;border-radius:2px;border:1px solid var(--gold);color:var(--ink);
+  background:transparent;cursor:pointer;transition:all .2s;line-height:1;
+}
+.btn:hover{background:var(--gold);color:#fff}
+.btn.solid{background:var(--gold);color:#fff}
+.btn.solid:hover{background:var(--gold-l);border-color:var(--gold-l)}
+.btn.ondark{border-color:var(--gold);color:var(--cream)}
+.btn.ondark:hover{background:var(--gold);color:var(--dark)}
+@media(max-width:640px){.hdr nav a.navlink{display:none}}
+
+/* ---------- hero (Bloque 1 · Resonancia) ---------- */
+.hero{padding:clamp(3.5rem,8vw,6.5rem) 0 clamp(3rem,6vw,5rem)}
+.hero h1{font-size:clamp(2.3rem,6.2vw,4.3rem);max-width:16ch;font-weight:500}
+.hero h1 .soft{color:var(--plomo);font-style:italic;font-weight:400}
+.hero .sub{margin-top:1.5rem;max-width:54ch;font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--body)}
+.hero .cta-row{margin-top:2.3rem;display:flex;flex-wrap:wrap;gap:.9rem 1.4rem;align-items:center}
+.hero .cta-row .quiet{font-size:.95rem;color:var(--plomo)}
+.hero .cta-row .quiet a{color:var(--ink);border-bottom:1px solid var(--line-gold);padding-bottom:1px}
+.hero .cta-row .quiet a:hover{color:var(--gold);border-color:var(--gold)}
+
+/* archetype triad */
+.triad{margin-top:clamp(2.5rem,5vw,3.5rem);display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+.triad .t{padding:1.4rem 1.3rem 0 0}
+.triad .t + .t{padding-left:1.3rem;border-left:1px solid var(--line)}
+.triad .tn{font-family:var(--serif);font-size:.95rem;color:var(--gold);margin-bottom:.4rem}
+.triad .td{font-size:.95rem;color:var(--body)}
+@media(max-width:720px){
+  .triad{grid-template-columns:1fr;border-top:none}
+  .triad .t{padding:1.1rem 0;border-top:1px solid var(--line)}
+  .triad .t + .t{padding-left:0;border-left:none}
+}
+
+/* ---------- reframe (Bloque 2) ---------- */
+.reframe .title{max-width:20ch}
+.reframe p.lead{margin-bottom:.9rem}
+.bars{margin-top:2.6rem;max-width:640px}
+.barlabel{display:flex;justify-content:space-between;align-items:baseline;font-size:.92rem;margin-bottom:.4rem}
+.barlabel .nm{color:var(--ink);font-weight:500}
+.barlabel .vl{color:var(--plomo);font-variant-numeric:tabular-nums}
+.bar{height:14px;border-radius:2px;background:rgba(28,28,26,.07);overflow:hidden;margin-bottom:1.35rem}
+.bar > span{display:block;height:100%;border-radius:2px}
+.bar.b1 > span{background:var(--plomo);width:33%}
+.bar.b2 > span{background:#A99877;width:64%}
+.bar.b3 > span{background:var(--gold);width:100%}
+.bars .disc{font-size:.78rem;color:var(--plomo);margin-top:.4rem}
+
+/* ---------- 3 capas (Bloque 3) ---------- */
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem);margin-top:2.8rem}
+.layer{padding-top:1.4rem;border-top:2px solid var(--gold)}
+.layer .ln{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--plomo);margin-bottom:.7rem}
+.layer h3{font-size:1.35rem;margin-bottom:.7rem}
+.layer p{font-size:.98rem;color:var(--body)}
+@media(max-width:720px){.layers{grid-template-columns:1fr;gap:0}.layer{margin-top:1.6rem}}
+
+/* ---------- prueba (Bloque 4) ---------- */
+.proof{}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.6rem;margin-bottom:3rem}
+.stat{border-left:2px solid var(--gold);padding-left:1.1rem}
+.stat .n{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--ink);line-height:1}
+.stat .l{font-size:.86rem;color:var(--plomo);margin-top:.5rem}
+@media(max-width:720px){.stats{grid-template-columns:1fr;gap:1.3rem}}
+.founder{display:grid;grid-template-columns:160px 1fr;gap:1.8rem;align-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.6rem 1.8rem;margin-bottom:3rem}
+.founder .photo{width:160px;height:160px;border-radius:3px;background:linear-gradient(135deg,#E8E1D2,#D9D0BC);
+  display:flex;align-items:center;justify-content:center;color:var(--plomo);font-size:.74rem;text-align:center;padding:1rem;border:1px solid var(--line)}
+.founder p{font-size:1.02rem;color:var(--body)}
+.founder p .name{font-family:var(--serif);color:var(--ink);font-size:1.15rem}
+@media(max-width:560px){.founder{grid-template-columns:1fr;justify-items:center;text-align:center}.founder .photo{width:130px;height:130px}}
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.case{background:#fff;border:1px solid var(--line);border-radius:4px;padding:1.4rem}
+.case .tag{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.case p{font-size:.93rem;color:var(--body)}
+@media(max-width:720px){.cases{grid-template-columns:1fr}}
+
+/* ---------- arquitectura (Bloque 5 · momento oscuro / firma) ---------- */
+.arch{background:var(--dark);color:var(--cream)}
+.arch h2.title,.arch .eyebrow{color:#fff}
+.arch .eyebrow{color:var(--gold-l)}
+.arch h2.title{color:#fff}
+.arch p.lead{color:rgba(244,241,234,.72)}
+.blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(196,152,73,.18);
+  border:1px solid rgba(196,152,73,.18);margin-top:2.8rem;border-radius:4px;overflow:hidden}
+.block{background:var(--dark);padding:1.5rem 1.4rem;min-height:128px}
+.block .bn{font-family:var(--serif);font-size:1.5rem;color:var(--gold);line-height:1;margin-bottom:.6rem}
+.block h3{color:#fff;font-size:1.05rem;font-family:var(--sans);font-weight:600;margin-bottom:.4rem}
+.block p{font-size:.86rem;color:rgba(244,241,234,.6)}
+@media(max-width:820px){.blocks{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.blocks{grid-template-columns:1fr}}
+.arch .method-link{margin-top:2.4rem}
+.arch .method-link a{color:var(--gold-l);font-size:.98rem;border-bottom:1px solid var(--line-gold);padding-bottom:2px}
+.arch .method-link a:hover{color:#fff}
+
+/* ---------- CTA escalonado (Bloque 6) ---------- */
+.invite .title{max-width:22ch}
+.steps{display:grid;grid-template-columns:1.4fr 1fr;gap:1.3rem;margin-top:2.6rem}
+.step{border-radius:4px;padding:1.8rem;border:1px solid var(--line);background:#fff}
+.step.primary{border:1px solid var(--gold);background:linear-gradient(180deg,#fff,#FBF8F1)}
+.step .sn{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+.step h3{font-size:1.4rem;margin-bottom:.6rem}
+.step p{font-size:.96rem;color:var(--body);margin-bottom:1.3rem;max-width:42ch}
+.step .btn{margin-top:.2rem}
+.passive{margin-top:1.5rem;font-size:.95rem;color:var(--plomo)}
+.passive a{color:var(--ink);border-bottom:1px solid var(--line-gold);padding-bottom:1px}
+.passive a:hover{color:var(--gold);border-color:var(--gold)}
+@media(max-width:720px){.steps{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+.ftr{background:var(--dark);color:rgba(244,241,234,.7);padding:clamp(3rem,6vw,4.5rem) 0 2.5rem}
+.ftr .top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2rem;align-items:flex-start}
+.ftr .brand .bt{color:#fff}
+.ftr .brand .bs{color:rgba(244,241,234,.5)}
+.ftr .tag{font-family:var(--serif);font-style:italic;color:var(--gold-l);font-size:1.15rem;margin-top:1rem;max-width:24ch}
+.ftr .links{display:flex;gap:1.6rem;flex-wrap:wrap}
+.ftr .links a{font-size:.9rem;color:rgba(244,241,234,.7)}
+.ftr .links a:hover{color:var(--gold-l)}
+.ftr .legal{margin-top:2.6rem;padding-top:1.4rem;border-top:1px solid rgba(196,152,73,.18);font-size:.78rem;color:rgba(244,241,234,.45);max-width:70ch}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* focus */
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<!-- SWAP: reemplaza el SVG por tu logo-casa real si prefieres (versión primaria: casa dorada + AMG tinta) -->
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="AMG Strategic Investments — inicio">
+      <img src="Logo_AMG-SI_Grey.svg" alt="AMG Strategic Investments" style="height:42px;width:auto;display:block">
+    </a>
+    <nav>
+      <a class="navlink" href="#metodo-link">El método</a>
+      <a class="navlink" href="#prueba">Resultados</a>
+      <!-- SWAP: enlace al calendario de 30 min -->
+      <a class="btn" href="#conversar">Conversemos</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ BLOQUE 1 · RESONANCIA / IDENTIDAD ============ -->
+<!-- INSIGHT: abrir nombrando la disonancia identitaria del arquetipo. Cero producto. Que el lector se reconozca. -->
+<section class="hero section">
+  <div class="wrap">
+    <p class="eyebrow reveal">El family office accesible para tu nueva etapa</p>
+    <h1 class="reveal">Tu carrera avanzó. <span class="soft">Tu patrimonio sigue en la misma silla.</span></h1>
+    <p class="sub reveal">Después de años construyendo tu trayectoria, tu capital también merece una estructura. Te acompaño a que crezca con criterio — sin que tengas que volverte experto en bolsa, y entendiendo cada decisión.</p>
+    <div class="cta-row reveal">
+      <!-- SWAP: ruta del Simulador si cambia el nombre del archivo -->
+      <a class="btn solid" href="AMG_Simulador.html">Descubre tu arquitectura en 5 preguntas</a>
+      <span class="quiet">o <a href="#conversar">conversemos 30 minutos</a>, sin venderte nada.</span>
+    </div>
+
+    <!-- triada de arquetipos: que los tres se sientan vistos -->
+    <div class="triad reveal" aria-label="Para quién es AMG">
+      <div class="t"><div class="tn">Saliste de una etapa larga</div><div class="td">Tienes liquidez en mano y una identidad en plena revisión. La plata quieta ya no te representa.</div></div>
+      <div class="t"><div class="tn">Reconstruiste solo, lejos de casa</div><div class="td">Llegaste hasta acá administrándolo tú. El siguiente nivel pide arquitectura, no más esfuerzo en soledad.</div></div>
+      <div class="t"><div class="tn">Miras tu próxima década</div><div class="td">Sabes que cada error pesa el doble a esta altura. Quieres diseñar, no improvisar.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOQUE 2 · EL REFRAME ============ -->
+<!-- INSIGHT: el capital quieto no es prudencia, es inercia con costo. Hacer visible lo invisible (mecanismo de la matriz, "no me duele tenerlo en el banco"). -->
+<section class="reframe section">
+  <div class="wrap">
+    <p class="eyebrow reveal">El costo de lo que no se ve</p>
+    <h2 class="title reveal">Ahorrar no es lo mismo que crecer.</h2>
+    <p class="lead reveal">Tu dinero en el banco no está descansando — está perdiendo terreno, en silencio. La inflación se lo come de a poco y la oportunidad de que trabaje con propósito pasa sin avisar.</p>
+    <p class="lead reveal">No es que te falte un producto financiero. Es que tu patrimonio todavía no refleja a la persona en la que te convertiste. <em>¿Está creciendo, o solo estás en modo ahorro?</em></p>
+
+    <div class="bars reveal" aria-label="Comparativa referencial de crecimiento a 10 años">
+      <div class="barlabel"><span class="nm">Ahorro tradicional</span><span class="vl">$100 → $148 · ~4% anual</span></div>
+      <div class="bar b1"><span></span></div>
+      <div class="barlabel"><span class="nm">Mercado global</span><span class="vl">$100 → $284 · ~11% anual</span></div>
+      <div class="bar b2"><span></span></div>
+      <div class="barlabel"><span class="nm">Arquitectura AMG</span><span class="vl">$100 → $441 · ~16% anual</span></div>
+      <div class="bar b3"><span></span></div>
+      <p class="disc">Proyección referencial sobre tasas históricas por perfil. No garantiza rendimiento futuro.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOQUE 3 · LAS TRES CAPAS ============ -->
+<!-- INSIGHT: no es un producto, es una experiencia. Lenguaje de experiencia, no de features (Realización / Exclusividad / Asistencia). -->
+<section class="layers-sec section" style="background:#EFEBE1">
+  <div class="wrap">
+    <p class="eyebrow reveal">Cómo se siente trabajar así</p>
+    <h2 class="title reveal">No es un producto. Es una experiencia en tres capas.</h2>
+    <div class="layers">
+      <div class="layer reveal">
+        <div class="ln">Realización</div>
+        <h3>Ves crecer tu capital entendiendo cada decisión.</h3>
+        <p>No es una caja negra ni un fondo donde pones la plata y rezas. Es un proceso que puedes seguir — sabes qué tienes, por qué lo tienes y hacia dónde va.</p>
+      </div>
+      <div class="layer reveal">
+        <div class="ln">Exclusividad</div>
+        <h3>Un círculo pequeño de ejecutivos como tú.</h3>
+        <p>Pocos clientes, todos nos conocemos. No es masivo ni anónimo: es selecto por la atención que cada arquitectura recibe. Gente de tu mundo, en tu misma etapa.</p>
+      </div>
+      <div class="layer reveal">
+        <div class="ln">Acompañamiento</div>
+        <h3>Alguien de tu mundo, en cada paso.</h3>
+        <p>En la decisión, en la duda y cuando el mercado se mueve y necesitas contexto. No te dejo solo con la pantalla — te acompaño con criterio, semana a semana.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOQUE 4 · PRUEBA TRANQUILA ============ -->
+<!-- INSIGHT: confianza por datos + lo humano, sin alardear. AUM, retención, track personal, 1 caso por arquetipo (el viaje, no solo el número). -->
+<section class="proof section" id="prueba">
+  <div class="wrap">
+    <p class="eyebrow reveal">Confianza que se sostiene</p>
+    <h2 class="title reveal">Datos, no promesas.</h2>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="n">+$100k</div><div class="l">gestionados en arquitecturas activas</div></div>
+      <div class="stat"><div class="n">100%</div><div class="l">de retención de clientes</div></div>
+      <div class="stat"><div class="n">~25%</div><div class="l">retorno en mi portafolio personal</div></div>
+    </div>
+
+    <div class="founder reveal">
+      <!-- SWAP: foto real de Aldo (cálida, de par, no corporativa). Reemplaza este div .photo por una <img>. -->
+      <div class="photo">[ Foto de Aldo<br>— cálida, de par ]</div>
+      <p><span class="name">Fui mi propio primer cliente.</span><br>
+      20 años en Telefónica HISPAM me enseñaron a leer mercados, presupuestos y decisiones. Cuando salí de la etapa corporativa, construí para mí lo que hoy construyo contigo. No te hablo como banco — te hablo como par que ya pasó por esto.</p>
+    </div>
+
+    <div class="cases reveal">
+      <div class="case">
+        <div class="tag">Recién liberada</div>
+        <p>Exejecutiva con ADN emprendedor. Salió con liquidez e identidad en transición. En dos meses tenía su arquitectura completa y portafolio activo — lo que la cerró no fue el método explicado, fue verlo coherente con quien ya era.</p>
+      </div>
+      <div class="case">
+        <div class="tag">Migrante reinventora</div>
+        <p>Reconstruyó su capital sola, lejos de casa. Cuatro módulos, diecisiete activos. Por primera vez en años, alguien que entendía su situación — no un banco que la veía como caso raro.</p>
+      </div>
+      <div class="case">
+        <div class="tag">Pre-próxima-etapa</div>
+        <p>+60, mirando su siguiente década. Diseñamos calibrado a su horizonte, no al de un joven. Superó el miedo a equivocarse a esta edad con método y acompañamiento — y con su pareja como co-protagonista.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOQUE 5 · ARQUITECTURA VISIBLE (firma / momento oscuro) ============ -->
+<!-- INSIGHT: los 6 bloques como SEÑAL de método (el "qué", no el "cómo"). El Motor vive en /método para el analítico que quiere auditar. -->
+<section class="arch section" id="arquitectura">
+  <div class="wrap">
+    <p class="eyebrow reveal">Tu patrimonio, diseñado</p>
+    <h2 class="title reveal">Arquitectura en bloques.</h2>
+    <p class="lead reveal">Seis bloques globales e independientes, calibrados a tu perfil y tu horizonte. Inviertes con estructura clara: ves de qué está hecho tu patrimonio y entiendes cada parte.</p>
+    <div class="blocks reveal">
+      <div class="block"><div class="bn">01</div><h3>Cimientos Core</h3><p>Compañías con ventaja competitiva consolidada y flujos predecibles.</p></div>
+      <div class="block"><div class="bn">02</div><h3>Reserva &amp; Refugio</h3><p>Cobertura sistémica: activos que preservan poder adquisitivo.</p></div>
+      <div class="block"><div class="bn">03</div><h3>Titanes Digitales</h3><p>Líderes con ecosistemas dominantes y alta rentabilidad sobre capital.</p></div>
+      <div class="block"><div class="bn">04</div><h3>Recursos &amp; Futuro</h3><p>Infraestructura crítica y materiales esenciales de la nueva economía.</p></div>
+      <div class="block"><div class="bn">05</div><h3>IA &amp; Infraestructura</h3><p>Software, semiconductores y centros de datos en el epicentro de la IA.</p></div>
+      <div class="block"><div class="bn">06</div><h3>Motores Emergentes</h3><p>Captura de valor en mercados con demografía y crecimiento acelerado.</p></div>
+    </div>
+    <p class="method-link reveal" id="metodo-link">
+      <!-- SWAP: renombra tu deck actual a metodo.html y enlázalo aquí -->
+      <a href="metodo.html">¿Quieres ver cómo selecciono cada activo? Conoce el método →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ BLOQUE 6 · CTA ESCALONADO ============ -->
+<!-- INSIGHT: el primer paso no es invertir, es entender. Microcompromiso (Simulador) antes que "agenda". La conversación sigue, pero como paso natural. -->
+<section class="invite section" id="conversar">
+  <div class="wrap">
+    <p class="eyebrow reveal">El primer paso</p>
+    <h2 class="title reveal">El primer paso no es invertir. Es entender.</h2>
+    <div class="steps">
+      <div class="step primary reveal">
+        <div class="sn">Empieza aquí · sin compromiso</div>
+        <h3>Descubre tu arquitectura en 5 preguntas</h3>
+        <p>Responde unas preguntas y recibe una lectura personalizada de tu situación patrimonial. Sin formularios largos, sin compromiso.</p>
+        <!-- SWAP: ruta del Simulador -->
+        <a class="btn solid" href="AMG_Simulador.html">Hacer mi diagnóstico</a>
+      </div>
+      <div class="step reveal">
+        <div class="sn">Cuando estés listo</div>
+        <h3>Conversemos 30 minutos</h3>
+        <p>Sin venderte nada. Sales sabiendo qué le falta a tu patrimonio y si tiene sentido para tu momento.</p>
+        <!-- SWAP: enlace a tu calendario (Google Calendar, 30 min) -->
+        <a class="btn" href="#">Agendar conversación</a>
+      </div>
+    </div>
+    <!-- SWAP: número de WhatsApp -->
+    <p class="passive reveal">¿Prefieres escribir? <a href="https://wa.me/51XXXXXXXXX" target="_blank" rel="noopener">Mándame un WhatsApp</a> y vemos por dónde.</p>
+    <!-- FUTURO: cuando lance el taller, entra aquí un tercer escalón (grupal, bajo compromiso) entre el Simulador y la conversación. -->
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="ftr">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <img src="Logo_AMG-SI_Black.svg" alt="AMG Strategic Investments" style="height:52px;width:auto;display:block">
+        <p class="tag">Tu capital, con criterio y claridad.</p>
+      </div>
+      <div class="links">
+        <a href="#arquitectura">Arquitectura</a>
+        <a href="metodo.html">El método</a>
+        <a href="AMG_Simulador.html">Diagnóstico</a>
+        <a href="AMG_Report_Jun26.html">Resultados</a>
+        <a href="#conversar">Conversemos</a>
+      </div>
+    </div>
+    <p class="legal">AMG Strategic Investments · Acompañamiento patrimonial y método — no constituye asesoría financiera regulada ni garantiza rendimientos. Toda decisión de inversión es del cliente. Perú · HISPAM.</p>
+  </div>
+</footer>
+
+<script>
+/* scroll reveal — respeta prefers-reduced-motion */
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  },{threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
