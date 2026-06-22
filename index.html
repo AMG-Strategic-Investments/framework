@@ -198,6 +198,21 @@ em,.it{font-style:italic}
 
 /* focus */
 a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+
+.chart-wrap{margin-top:2.8rem;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1.8rem 1.8rem 1.3rem;max-width:680px}
+.chart-title-row{font-family:var(--serif);font-size:1.05rem;color:var(--ink);margin-bottom:1.4rem;display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+.chart-sub{font-family:var(--sans);font-size:.78rem;color:var(--plomo);font-weight:400}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;margin-bottom:1.2rem}
+.leg{display:flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--body)}
+.leg-line{width:20px;height:2px;border-radius:2px;flex:none}
+.chart-svg{width:100%;height:auto;display:block;overflow:visible}
+.end-vals{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:1.1rem;border-top:1px solid var(--line);padding-top:1.1rem}
+.ev{text-align:center}
+.ev .n{font-family:var(--serif);font-size:1.3rem;color:var(--ink)}
+.ev .n.gold{color:var(--gold)}
+.ev .l{font-size:.74rem;color:var(--plomo);margin-top:.2rem}
+.disc{font-size:.72rem;color:var(--plomo);margin-top:.8rem;font-style:italic}
+
 </style>
 </head>
 <body>
@@ -252,7 +267,8 @@ a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:
     <p class="lead reveal">Tu dinero en el banco no está descansando — está perdiendo terreno, en silencio. La inflación se lo come de a poco y la oportunidad de que trabaje con propósito pasa sin avisar.</p>
     <p class="lead reveal">No es que te falte un producto financiero. Es que tu patrimonio todavía no refleja a la persona en la que te convertiste. <em>¿Está creciendo, o solo estás en modo ahorro?</em></p>
 
-    <div class="bars reveal" aria-label="Comparativa referencial de crecimiento a 10 años">
+    <!-- VERSIÓN ANTERIOR DE COMPARATIVO EN TRES BARRAS
+     <div class="bars reveal" aria-label="Comparativa referencial de crecimiento a 10 años">
       <div class="barlabel"><span class="nm">Ahorro tradicional</span><span class="vl">$10k → $14,800 ~4% anual</span></div>
       <div class="bar b1"><span></span></div>
       <div class="barlabel"><span class="nm">Mercado global</span><span class="vl">$10k → $28,400 ~11% anual</span></div>
@@ -260,7 +276,65 @@ a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:
       <div class="barlabel"><span class="nm">Arquitectura AMG</span><span class="vl">$10k → $44,100 ~16% anual</span></div>
       <div class="bar b3"><span></span></div>
       <p class="disc">Proyección referencial a 10 años sobre tasas históricas por perfil. No garantiza rendimiento futuro.</p>
-    </div>
+    </div> -->
+  
+  <div class="chart-wrap reveal" aria-label="Evolución patrimonial a 10 años">
+  <div class="chart-title-row">
+    Proyección de $10,000 invertidos
+    <span class="chart-sub">horizonte 10 años</span>
+  </div>
+  <div class="legend">
+    <div class="leg"><div class="leg-line" style="background:#C49849;height:3px"></div>Arquitectura AMG · 16% anual</div>
+    <div class="leg"><div class="leg-line" style="background:#7F9BB5"></div>Mercado global (S&P 500) · 11% anual</div>
+    <div class="leg"><div class="leg-line" style="background:#B0A898;height:1.5px"></div>Ahorro tradicional · 4% anual</div>
+  </div>
+  <svg class="chart-svg" viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gAMG" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#C49849" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#C49849" stop-opacity="0.02"/>
+      </linearGradient>
+      <linearGradient id="gSP" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#7F9BB5" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#7F9BB5" stop-opacity="0.02"/>
+      </linearGradient>
+    </defs>
+    <line x1="40" y1="195" x2="525" y2="195" stroke="rgba(28,28,26,.08)" stroke-width="1"/>
+    <line x1="40" y1="150" x2="525" y2="150" stroke="rgba(28,28,26,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="40" y1="105" x2="525" y2="105" stroke="rgba(28,28,26,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="40" y1="60"  x2="525" y2="60"  stroke="rgba(28,28,26,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="40" y1="15"  x2="525" y2="15"  stroke="rgba(28,28,26,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+    <text x="34" y="198" text-anchor="end" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">$10k</text>
+    <text x="34" y="153" text-anchor="end" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">$20k</text>
+    <text x="34" y="108" text-anchor="end" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">$30k</text>
+    <text x="34" y="63"  text-anchor="end" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">$40k</text>
+    <text x="34" y="18"  text-anchor="end" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">$50k</text>
+    <text x="40"  y="212" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">Hoy</text>
+    <text x="136" y="212" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">Año 2</text>
+    <text x="232" y="212" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">Año 4</text>
+    <text x="328" y="212" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">Año 6</text>
+    <text x="424" y="212" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">Año 8</text>
+    <text x="520" y="212" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-size="9" fill="#7F7F7F">Año 10</text>
+    <path d="M40,195 C64,193 88,188 136,180 C160,175 184,170 232,159 C256,152 280,145 328,129 C352,120 376,111 424,89 C448,77 472,65 520,42 L520,195 Z" fill="url(#gAMG)"/>
+    <path d="M40,195 C64,193 88,190 136,185 C160,182 184,179 232,173 C256,170 280,166 328,159 C352,155 376,151 424,142 C448,137 472,132 520,112 L520,195 Z" fill="url(#gSP)"/>
+    <path d="M40,195 C160,194 280,185 520,173" stroke="#B0A898" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+    <path d="M40,195 C64,193 88,190 136,185 C160,182 184,179 232,173 C256,170 280,166 328,159 C352,155 376,151 424,142 C448,137 472,132 520,112" stroke="#7F9BB5" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="520" cy="112" r="3" fill="#7F9BB5"/>
+    <path d="M40,195 C64,192 88,188 136,180 C160,175 184,170 232,159 C256,152 280,145 328,129 C352,120 376,111 424,89 C448,77 472,65 520,42" stroke="#C49849" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="520" cy="42" r="3.5" fill="#C49849"/>
+    <text x="526" y="38"  font-family="Instrument Sans,sans-serif" font-size="9.5" font-weight="600" fill="#C49849">$44,100</text>
+    <text x="526" y="109" font-family="Instrument Sans,sans-serif" font-size="9.5" font-weight="500" fill="#7F9BB5">$28,400</text>
+    <text x="526" y="170" font-family="Instrument Sans,sans-serif" font-size="9.5" fill="#B0A898">$14,800</text>
+  </svg>
+  <div class="end-vals">
+    <div class="ev"><div class="n gold">$44,100</div><div class="l">Arquitectura AMG · 16%</div></div>
+    <div class="ev"><div class="n" style="color:#7F9BB5">$28,400</div><div class="l">Mercado global · 11%</div></div>
+    <div class="ev"><div class="n" style="color:#B0A898">$14,800</div><div class="l">Ahorro tradicional · 4%</div></div>
+  </div>
+  <p class="disc">Proyección referencial sobre tasas históricas por perfil. No garantiza rendimiento futuro.</p>
+</div>
+  
+  
   </div>
 </section>
 
