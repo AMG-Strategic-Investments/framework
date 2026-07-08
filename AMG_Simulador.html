@@ -411,21 +411,31 @@ canvas#mainChart{width:100%!important}
       <div class="costs-section" id="costsSection"></div>
 
       <!-- Agenda CTA -->
-      <div style="margin-top:20px;background:rgba(184,145,42,.07);border:1px solid rgba(184,145,42,.25);border-radius:4px;padding:18px 16px">
-        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:8px">¿Te interesa esta arquitectura?</div>
-        <div style="font-size:13px;color:var(--smoke);line-height:1.55;margin-bottom:14px">Agendemos 30 minutos para calibrar tu portafolio con datos reales y resolver tus dudas.</div>
+    <div style="margin-top:20px;background:rgba(184,145,42,.07);border:1px solid rgba(184,145,42,.25);border-radius:4px;padding:18px 16px">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mist);margin-bottom:8px">¿Te interesa esta arquitectura?</div>
+      <div style="font-size:13px;color:var(--smoke);line-height:1.55;margin-bottom:16px">Déjame tu correo y te mando una lectura personalizada de tu situación. Sin compromiso. En 48 horas.</div>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <input id="ctaEmail" type="email" placeholder="tu@correo.com"
+          style="flex:1;background:var(--ink4);border:1px solid var(--ink5);border-radius:2px;padding:11px 13px;color:var(--parch);font-family:'Outfit',sans-serif;font-size:13px;outline:none;transition:border-color .2s"
+          onfocus="this.style.borderColor='var(--gold)'"
+          onblur="this.style.borderColor='var(--ink5)'">
+        <button onclick="enviarLectura()"
+          style="background:var(--gold);color:var(--ink2);border:none;border-radius:2px;padding:11px 16px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background .2s"
+          onmouseover="this.style.background='#D4AE52'"
+          onmouseout="this.style.background='var(--gold)'">
+          Recibir mi lectura →
+        </button>
+      </div>
+      <div id="ctaMsg" style="font-size:12px;color:var(--gold);min-height:18px;margin-bottom:12px"></div>
+      <div style="border-top:1px solid var(--ink5);padding-top:12px;text-align:center">
         <a href="https://calendar.app.google/yT4R6TkANQEUGsVC6" target="_blank" rel="noopener"
-           style="display:flex;align-items:center;justify-content:center;gap:9px;background:var(--gold);color:var(--ink2);padding:13px 16px;border-radius:2px;font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:background .2s"
-           onmouseover="this.style.background='#D4AE52'" onmouseout="this.style.background='var(--gold)'">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
-            <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
-            <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          Agendar sesión de calibración
+          style="font-size:12px;color:var(--mist);text-decoration:none;transition:color .2s"
+          onmouseover="this.style.color='var(--gold-l)'"
+          onmouseout="this.style.color='var(--mist)'">
+          ¿Prefieres conversar directamente? Agenda 30 minutos →
         </a>
       </div>
+</div>
     </div>
   </div>
 
@@ -997,6 +1007,35 @@ function toggleGroup(id){
 
 // ── ENTER on name ─────────────────────────────────────
 document.getElementById('nameIn').addEventListener('keydown',e=>{if(e.key==='Enter')startCalib();});
+
+  document.getElementById('nameIn').addEventListener('keydown',e=>{if(e.key==='Enter')startCalib();});
+
+function enviarLectura() {
+  const email = document.getElementById('ctaEmail').value.trim();
+  const msg   = document.getElementById('ctaMsg');
+  if (!email || !email.includes('@')) {
+    msg.style.color = '#cc6644';
+    msg.textContent = 'Ingresa un correo válido para continuar.';
+    return;
+  }
+  const perfil  = S.prof ? PROFS[S.prof].name : '—';
+  const capital = S.capMid ? '$' + S.capMid.toLocaleString('es-419') : '—';
+  const horiz   = S.q5 ? HORIZONTE_LBL[S.q5] : '—';
+  const pais    = CONFIG.paises[S.country]?.label || '—';
+  const asunto  = encodeURIComponent('Lectura AMG — ' + S.name);
+  const cuerpo  = encodeURIComponent(
+    'Nombre: ' + S.name + '\n' +
+    'Email: ' + email + '\n' +
+    'País: ' + pais + '\n' +
+    'Perfil: ' + perfil + '\n' +
+    'Capital: ' + capital + '\n' +
+    'Horizonte: ' + horiz + '\n' +
+    'Puntaje: ' + S.score + ' / 12'
+  );
+  window.location.href = 'mailto:amallmag@gmail.com?subject=' + asunto + '&body=' + cuerpo;
+  msg.style.color = 'var(--gold)';
+  msg.textContent = '✓ Abriendo tu correo con los datos listos…';
+}
 </script>
 </body>
 </html>
