@@ -18,7 +18,7 @@
   --red-fill:rgba(120,40,30,.18);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-size:15px}
+html{font-size:17px}
 body{background:var(--ink);color:var(--parch);font-family:'Outfit',sans-serif;font-size:1rem;line-height:1.6;min-height:100vh;overflow-x:hidden}
 
 /* ─ screens ─ */
@@ -224,7 +224,7 @@ canvas#mainChart{width:100%!important}
   <div class="logo">AMG</div>
   <div class="logo-tag">Strategic Investments · Powered by AI</div>
   <h1 class="intro-h1">Tu arquitectura<br><em>patrimonial</em> en 5 preguntas</h1>
-  <p class="intro-p">Respondé y construimos juntos la estructura de inversión que refleja tu momento y objetivos.</p>
+  <p class="intro-p">Responde y construimos juntos la estructura de inversión que refleja tu momento y objetivos.</p>
   <div class="orn"><div class="orn-d"></div></div>
   <div class="name-lbl">¿Con quién hablo hoy?</div>
   <div class="name-wrap">
@@ -254,46 +254,46 @@ canvas#mainChart{width:100%!important}
     <!-- 01 -->
     <div class="q-block">
       <div class="q-num">01 · Objetivo patrimonial</div>
-      <div class="q-title">¿Cuál es tu prioridad para tu excedente de capital en los próximos 5 a 10 años?</div>
+      <div class="q-title">¿Cuál es tu prioridad para este capital en los próximos años?</div>
       <div class="sl-track" id="q1t">
         <div class="sl-opt" onclick="selQ('q1',1,this)"><span class="sl-num">1</span><span class="sl-lbl">Proteger</span></div>
         <div class="sl-opt" onclick="selQ('q1',2,this)"><span class="sl-num">2</span><span class="sl-lbl">Crecer</span></div>
-        <div class="sl-opt" onclick="selQ('q1',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Optimizar</span></div>
+        <div class="sl-opt" onclick="selQ('q1',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Multiplicar</span></div>
         <div class="sl-opt" onclick="selQ('q1',4,this)"><span class="sl-num">4</span><span class="sl-lbl">Maximizar</span></div>
       </div>
-      <div class="sl-desc" id="q1d">Seleccioná tu nivel de ambición patrimonial.</div>
+      <div class="sl-desc" id="q1d">Selecciona tu nivel de ambición patrimonial.</div>
     </div>
 
     <!-- 02 -->
     <div class="q-block">
       <div class="q-num">02 · Relación con la volatilidad</div>
-      <div class="q-title">¿Cómo te posicionás frente a las fluctuaciones naturales de la bolsa americana?</div>
+      <div class="q-title">¿Cómo te sentirías si una empresa de tu portafolio cae 20% en un mes?</div>
       <div class="sl-track" id="q2t">
-        <div class="sl-opt" onclick="selQ('q2',1,this)"><span class="sl-num">1</span><span class="sl-lbl">Conservar</span></div>
-        <div class="sl-opt" onclick="selQ('q2',2,this)"><span class="sl-num">2</span><span class="sl-lbl">Proactivo</span></div>
-        <div class="sl-opt" onclick="selQ('q2',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Analítico</span></div>
-        <div class="sl-opt" onclick="selQ('q2',4,this)"><span class="sl-num">4</span><span class="sl-lbl">Oportunidad</span></div>
+        <div class="sl-opt" onclick="selQ('q2',1,this)"><span class="sl-num">1</span><span class="sl-lbl">Me preocupa mucho</span></div>
+        <div class="sl-opt" onclick="selQ('q2',2,this)"><span class="sl-num">2</span><span class="sl-lbl">Lo acepto con incomodidad</span></div>
+        <div class="sl-opt" onclick="selQ('q2',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Lo analizo con calma</span></div>
+        <div class="sl-opt" onclick="selQ('q2',4,this)"><span class="sl-num">4</span><span class="sl-lbl">Lo veo como oportunidad</span></div>
       </div>
-      <div class="sl-desc" id="q2d">Indicá cómo reaccionás ante una corrección del mercado.</div>
+      <div class="sl-desc" id="q2d">Indica cómo reaccionas ante una corrección del mercado.</div>
     </div>
 
     <!-- 03 -->
     <div class="q-block">
       <div class="q-num">03 · Arquitectura preferida</div>
-      <div class="q-title">¿Cómo preferís estructurar tus inversiones?</div>
+      <div class="q-title">¿Qué tan abierto estás a invertir en empresas y mercados que no conoces tanto?</div>
       <div class="sl-track" id="q3t">
-        <div class="sl-opt" onclick="selQ('q3',1,this)"><span class="sl-num">1</span><span class="sl-lbl">ETFs</span></div>
-        <div class="sl-opt" onclick="selQ('q3',2,this)"><span class="sl-num">2</span><span class="sl-lbl">Híbrido</span></div>
-        <div class="sl-opt" onclick="selQ('q3',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Estratégico</span></div>
-        <div class="sl-opt" onclick="selQ('q3',4,this)"><span class="sl-num">4</span><span class="sl-lbl">Líderes</span></div>
+        <div class="sl-opt" onclick="selQ('q3',1,this)"><span class="sl-num">1</span><span class="sl-lbl">Prefiero lo conocido</span></div>
+        <div class="sl-opt" onclick="selQ('q3',2,this)"><span class="sl-num">2</span><span class="sl-lbl">Mayormente conocido</span></div>
+        <div class="sl-opt" onclick="selQ('q3',3,this)"><span class="sl-num">3</span><span class="sl-lbl">Equilibrado</span></div>
+        <div class="sl-opt" onclick="selQ('q3',4,this)"><span class="sl-num">4</span><span class="sl-lbl">Abierto a explorar</span></div>
       </div>
-      <div class="sl-desc" id="q3d">De fondos indexados a concentración directa en empresas líderes.</div>
+      <div class="sl-desc" id="q3d">De empresas ampliamente reconocidas a líderes de nichos</div>
     </div>
 
     <!-- 04 Capital -->
     <div class="q-block">
       <div class="q-num">04 · Capital inicial</div>
-      <div class="q-title">¿Con qué capital pensás arrancar?</div>
+      <div class="q-title">¿Con qué capital piensas arrancar?</div>
       <div class="cap-chips">
         <div class="cap-chip" onclick="selCap(this,'A',5000)">Hasta $5k</div>
         <div class="cap-chip" onclick="selCap(this,'B',10000)">$5k – $10k</div>
@@ -305,7 +305,7 @@ canvas#mainChart{width:100%!important}
     <!-- 05 Horizonte -->
     <div class="q-block" style="border-bottom:none">
       <div class="q-num">05 · Horizonte de inversión</div>
-      <div class="q-title">¿Por cuánto tiempo pensás mantener esta inversión?</div>
+      <div class="q-title">¿Por cuánto tiempo piensas mantener esta inversión?</div>
       <div class="sl-track" id="q5t">
         <div class="sl-opt" onclick="selQ('q5',1,this)"><span class="sl-num" style="font-size:17px">−2a</span><span class="sl-lbl">Liquidez</span></div>
         <div class="sl-opt" onclick="selQ('q5',2,this)"><span class="sl-num" style="font-size:17px">3–5a</span><span class="sl-lbl">Moderado</span></div>
@@ -320,8 +320,8 @@ canvas#mainChart{width:100%!important}
     <div class="live-lbl">Vista en tiempo real</div>
     <div class="live-card" id="liveCard">
       <div class="live-pill" id="lPill" style="background:rgba(106,100,64,.15);border-color:rgba(106,100,64,.4);color:var(--fog)">◆ Construyendo perfil</div>
-      <div class="live-pname" id="lName" style="color:var(--mist)">Respondé las preguntas</div>
-      <div class="live-desc" id="lDesc">El perfil se revela a medida que avanzás.</div>
+      <div class="live-pname" id="lName" style="color:var(--mist)">Tu arquitectura toma forma con cada respuesta</div>
+      <div class="live-desc" id="lDesc">A medida que avances, el perfil que emerge es tuyo. No un molde genérico.</div>
       <div class="live-attrs">
         <div class="attr-box"><div class="attr-lbl">Capital</div><div class="attr-val" id="atrCap">—</div></div>
         <div class="attr-box"><div class="attr-lbl">Empresas</div><div class="attr-val" id="atrEmp">—</div></div>
@@ -373,7 +373,7 @@ canvas#mainChart{width:100%!important}
     <div class="res-l" id="resL">
       <div class="chart-wrap"><canvas id="mainChart" height="230"></canvas></div>
       <div class="hl-box">
-        <div class="hl-lbl">Lo que esto significa para vos</div>
+        <div class="hl-lbl">Lo que esto significa para ti</div>
         <div class="hl-txt" id="hlTxt">—</div>
       </div>
       <div class="inputs-row">
@@ -624,18 +624,18 @@ const HAPI = Object.fromEntries(
 );
 
 const QDESC = {
-  q1:['Empatar o superar levemente la inflación — baja volatilidad, capital protegido.',
-      'Superar claramente los instrumentos tradicionales aceptando fluctuaciones moderadas.',
-      'Valoración importante mediante selección estratégica, asumiendo la volatilidad del mercado.',
-      'Expansión acelerada a largo plazo — rendimiento compuesto, captura de oportunidades de alto impacto.'],
-  q2:['Prefiero carteras diversificadas que suavicen las caídas — permanencia sobre rendimiento.',
-      'Veo la volatilidad como parte necesaria del crecimiento y oportunidad para validar mi tesis.',
-      'Acepto variaciones negativas temporales si los activos son de buena calidad.',
-      'Las correcciones son ventanas para incrementar posiciones en líderes a precios descontados.'],
-  q3:['ETFs que replican el mercado — diversificación máxima sobre retorno individual.',
-      'Base de fondos indexados con participación mínima en empresas de alta capitalización.',
-      'Núcleo en fondos/metales + selección directa de Titanes (Apple, Visa, Nvidia…).',
-      'Concentración en empresas que dominan la economía global — sin dilución de cartera.'],
+  q1:['Mi prioridad es que no pierda valor. El crecimiento es secundario.',
+      'Quiero que crezca de forma constante y predecible.',
+      'Quiero crecimiento real, por encima del mercado.',
+      'Priorizo el mayor retorno posible, acepto más variación.'],
+  q2:['Prefiero evitar esa posibilidad aunque signifique menor retorno.',
+      'Lo toleraría, pero me generaría ansiedad hasta que se recupere.',
+      'Evaluaría el contexto antes de reaccionar.',
+      'Una corrección es momento de comprar más, no de salir.'],
+  q3:['Me siento más cómodo con marcas y mercados que ya conozco.',
+      'Abriría una parte pequeña a nuevas ideas, con buena justificación.',
+      'Me interesa diversificar si hay criterio claro detrás.',
+      'Confío en el método para ir más allá de lo evidente.'],
   q5:['Menos de 2 años — prioridad en liquidez y preservación.',
       '3 a 5 años — crecimiento moderado con visibilidad de resultados.',
       '5 a 10 años — visión de largo plazo y capitalización compuesta.',
