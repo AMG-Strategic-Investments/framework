@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brújula Patrimonial · Aldo Mallma — AMG Strategic Investments</title>
+<meta name="description" content="Brújula Patrimonial: la lectura de mercado semanal de Aldo Mallma, fundador de AMG Strategic Investments, publicada en alianza con TuCambista.">
+<meta property="og:title" content="Brújula Patrimonial · AMG Strategic Investments">
+<meta property="og:description" content="Cada semana, una lectura de mercado con criterio — sin jerga, sin promesas.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4F1EA;
+    --ink:#1C1C1A;
+    --black:#000000;
+    --grey:#7F7F7F;
+    --white:#FFFFFF;
+    --gold:#C49849;
+    --rule: rgba(28,28,26,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--black);
+    font-family:'Instrument Sans', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  header.nav{padding:28px 0 20px;border-bottom:1px solid var(--rule);}
+  .nav-inner{
+    max-width:920px;margin:0 auto;padding:0 24px;
+    display:flex;align-items:center;justify-content:space-between;
+    flex-wrap:wrap;gap:14px;
+  }
+  .nav-logo img{height:28px;}
+  .nav-links{display:flex;gap:22px;flex-wrap:wrap;font-size:14px;}
+  .nav-links a{text-decoration:none;color:var(--ink);opacity:0.75;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .back-link{
+    display:inline-block;margin:22px 0 0;font-size:13px;color:var(--grey);
+    text-decoration:none;letter-spacing:.02em;
+  }
+  .back-link:hover{color:var(--ink);}
+
+  /* HERO */
+  .hero{padding:56px 0 40px;text-align:center;}
+  .eyebrow{
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:16px;
+  }
+  h1{
+    font-family:'Playfair Display', serif;font-weight:600;
+    font-size:clamp(30px,4.4vw,44px);line-height:1.18;
+    margin:0 0 18px;color:var(--black);
+  }
+  .hero-sub{font-size:17px;color:var(--ink);opacity:.85;max-width:540px;margin:0 auto;}
+
+  /* IDENTIDAD (foto + datos, no promesas) */
+  .identity{
+    margin:44px 0 0;padding:36px 28px;background:var(--white);border-radius:4px;
+  }
+  .identity-top{
+    display:flex;align-items:center;gap:20px;justify-content:center;
+    margin-bottom:30px;
+  }
+  .identity-photo{
+    width:64px;height:64px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  }
+  .identity-photo img{width:100%;height:100%;object-fit:cover;}
+  .identity-name{font-family:'Playfair Display', serif;font-weight:600;font-size:18px;color:var(--black);}
+  .identity-role{font-size:13.5px;color:var(--grey);}
+
+  .stats-eyebrow{
+    text-align:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--grey);font-weight:600;margin-bottom:26px;
+  }
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center;}
+  .stat-num{
+    font-family:'Playfair Display', serif;font-weight:700;
+    font-size:clamp(26px,4vw,34px);color:var(--gold);line-height:1;margin-bottom:8px;
+  }
+  .stat-label{font-size:13.5px;color:var(--ink);opacity:.8;}
+  .flag-row{display:flex;justify-content:center;gap:6px;margin-top:8px;}
+  .flag-row img{width:20px;height:14px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px var(--rule);}
+
+  .bio-line{
+    text-align:center;margin-top:28px;padding-top:24px;border-top:1px solid var(--rule);
+    font-size:14.5px;color:var(--ink);opacity:.85;
+  }
+  .bio-line strong{color:var(--black);opacity:1;}
+  .bio-line a{color:var(--gold);text-decoration:none;font-weight:500;}
+
+  /* CTA — 3 capas */
+  .cta{text-align:center;padding:48px 0 8px;}
+  .cta h2{
+    font-family:'Playfair Display', serif;font-weight:600;
+    font-size:clamp(22px,3vw,28px);margin:0 0 12px;
+  }
+  .cta > p{font-size:15.5px;color:var(--ink);opacity:.8;margin:0 0 30px;}
+
+  .cta-step{margin-bottom:22px;}
+  .cta-step-label{
+    font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);
+    margin-bottom:10px;
+  }
+  .btn-primary{
+    display:inline-block;background:var(--black);color:var(--white);
+    text-decoration:none;padding:15px 34px;border-radius:2px;
+    font-size:15px;font-weight:500;letter-spacing:.01em;transition:background .2s;
+  }
+  .btn-primary:hover{background:var(--gold);}
+  .btn-secondary{
+    display:inline-block;background:transparent;color:var(--black);
+    border:1px solid var(--black);text-decoration:none;padding:14px 32px;border-radius:2px;
+    font-size:15px;font-weight:500;transition:all .2s;
+  }
+  .btn-secondary:hover{background:var(--black);color:var(--white);}
+  .cta-step-sub{font-size:13.5px;color:var(--grey);margin-top:10px;}
+
+  .cta-tertiary{margin-top:8px;font-size:13.5px;color:var(--grey);}
+  .cta-tertiary a{color:var(--ink);text-decoration:underline;}
+
+  /* DIVIDER */
+  .divider{max-width:920px;margin:56px auto 0;padding:0 24px;}
+  .divider hr{border:none;border-top:1px solid var(--rule);margin:0;}
+
+  /* LECTURA */
+  .section-label{
+    text-align:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--grey);font-weight:600;margin:52px 0 8px;
+  }
+  article.reading{margin-top:20px;}
+  .reading-meta{text-align:center;font-size:13px;color:var(--grey);margin-bottom:10px;}
+  .reading-title-row{
+    display:flex;align-items:center;justify-content:center;gap:10px;margin:0 0 32px;
+  }
+  .reading-title-row img.flag{width:26px;height:18px;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px var(--rule);}
+  .reading h3{
+    font-family:'Playfair Display', serif;font-weight:600;
+    font-size:clamp(24px,3.4vw,32px);text-align:center;line-height:1.25;margin:0;
+    color:var(--black);
+  }
+  .reading p{font-size:16.5px;color:var(--ink);margin:0 0 20px;}
+  .signature{margin-top:32px;padding-top:20px;border-top:1px solid var(--rule);font-size:15px;}
+  .signature .name{font-weight:600;color:var(--black);}
+  .signature .role{color:var(--grey);font-size:13.5px;}
+  .disclaimer-note{margin-top:22px;font-size:13px;color:var(--grey);font-style:italic;}
+
+  /* ARCHIVO */
+  .archive{margin:64px 0 0;}
+  details.archive-item{background:var(--white);border-radius:4px;padding:22px 26px;margin-bottom:14px;}
+  details.archive-item summary{
+    cursor:pointer;list-style:none;display:flex;justify-content:space-between;
+    align-items:baseline;gap:16px;font-weight:600;color:var(--black);font-size:15.5px;
+  }
+  details.archive-item summary::-webkit-details-marker{display:none;}
+  details.archive-item summary .arrow{color:var(--gold);font-size:14px;transition:transform .2s;}
+  details.archive-item[open] summary .arrow{transform:rotate(90deg);}
+  .archive-date{font-size:13px;color:var(--grey);font-weight:400;white-space:nowrap;}
+  .archive-body{margin-top:20px;}
+  .archive-body p{font-size:15.5px;color:var(--ink);margin:0 0 16px;}
+  .archive-body .signature{margin-top:22px;}
+
+  /* FOOTER */
+  footer{margin-top:80px;padding:44px 0 40px;border-top:1px solid var(--rule);text-align:center;}
+  footer img{height:26px;margin:0 auto 10px;}
+  .footer-tag{font-size:13px;color:var(--grey);margin-bottom:22px;}
+  .footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:13.5px;margin-bottom:26px;}
+  .footer-links a{text-decoration:none;color:var(--ink);opacity:.75;}
+  .footer-legal{font-size:12px;color:var(--grey);max-width:560px;margin:0 auto;line-height:1.6;}
+
+  @media (max-width:600px){
+    .stats-grid{grid-template-columns:1fr;gap:26px;}
+    .nav-links{display:none;}
+    .identity-top{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="https://amgpatrimonial.com/"><img src="assets/logo-nav.svg" alt="AMG Strategic Investments"></a>
+    <nav class="nav-links">
+      <a href="https://amgpatrimonial.com/#arquitectura">Arquitectura</a>
+      <a href="https://amgpatrimonial.com/metodo.html">El método</a>
+      <a href="https://amgpatrimonial.com/AMG_Simulador.html">Diagnóstico</a>
+      <a href="https://amgpatrimonial.com/AMG_Report_Jun26.html">Resultados</a>
+      <a href="https://amgpatrimonial.com/#conversar">Conversemos</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <a class="back-link" href="https://amgpatrimonial.com/">← Volver al inicio</a>
+
+  <section class="hero">
+    <div class="eyebrow">Brújula Patrimonial · Lunes de Bolsa, TuCambista</div>
+    <h1>Una lectura de mercado con criterio, cada semana.</h1>
+    <p class="hero-sub">Nada de jerga ni promesas. Lo que veo pasar en los mercados, contado como se lo contaría a un colega — y por qué eso importa para tu patrimonio.</p>
+  </section>
+
+  <section class="identity">
+    <div class="identity-top">
+      <div class="identity-photo"><img src="https://amgpatrimonial.com/foto_profile.webp" alt="Aldo Mallma"></div>
+      <div>
+        <div class="identity-name">Aldo Mallma Granados</div>
+        <div class="identity-role">Fundador, AMG Strategic Investments</div>
+      </div>
+    </div>
+
+    <div class="stats-eyebrow">Datos, no promesas</div>
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">de retención de clientes</div>
+      </div>
+      <div>
+        <div class="stat-num">~25%</div>
+        <div class="stat-label">de retorno en mi portafolio personal</div>
+      </div>
+      <div>
+        <div class="stat-num">3 países</div>
+        <div class="stat-label">con clientes activos</div>
+        <div class="flag-row">
+          <img src="assets/flag-pe.svg" alt="Perú">
+          <img src="assets/flag-co.svg" alt="Colombia">
+          <img src="assets/flag-mx.svg" alt="México">
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-line">
+      20 años en Telefónica HISPAM. Fui mi propio primer cliente.
+      Hoy acompaño a ejecutivos LATAM a invertir en bolsa americana con arquitectura, no con azar.
+      <br>Conoce más en <a href="https://amgpatrimonial.com/">amgpatrimonial.com</a>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>¿Le damos una mirada a tu situación patrimonial?</h2>
+    <p>Sin compromiso — el primer paso es entender, no invertir.</p>
+
+    <div class="cta-step">
+      <div class="cta-step-label">Empieza aquí</div>
+      <a class="btn-primary" href="https://amgpatrimonial.com/AMG_Simulador.html">Descubre tu arquitectura en 5 preguntas</a>
+      <div class="cta-step-sub">Responde y recibe una lectura personalizada de tu situación patrimonial.</div>
+    </div>
+
+    <div class="cta-step">
+      <div class="cta-step-label">O si prefieres conversarlo</div>
+      <a class="btn-secondary" href="https://wa.me/51971161022" target="_blank" rel="noopener">Escríbeme por WhatsApp</a>
+      <div class="cta-step-sub">Y vemos por dónde.</div>
+    </div>
+
+    <div class="cta-tertiary">
+      Si ya sabes que quieres verlo aplicado a tu caso, <a href="https://calendar.app.google/wDfN8E2jmETBwb2B7" target="_blank" rel="noopener">agenda 30 minutos directamente</a>.
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <div class="section-label">Lectura de la semana</div>
+
+  <article class="reading">
+    <div class="reading-meta">Edición 02 · Brújula Patrimonial</div>
+    <div class="reading-title-row">
+      <img class="flag" src="assets/flag-kr.svg" alt="Corea del Sur">
+      <h3>La montaña rusa donde el tiempo vale doble</h3>
+    </div>
+
+    <p>Esta semana el índice que agrupa las principales acciones de Corea del Sur —el KOSPI— vivió emociones extremas, que hasta al más temerario lograron doblegar. Cayó con fuerza hasta más de un 30%, llevando a cientos de miles de inversionistas a ventas forzadas y pérdidas repentinas. Luego, cuando nadie lo esperaba, cerró la semana con una de las mayores subidas diarias de su historia, recuperando gran parte de lo perdido. Mismo mercado, mismos días, y la historia se puede contar con finales completamente distintos según quién estaba adentro.</p>
+
+    <p>Porque lo que separó a unos de otros no fue el conocimiento de mercados ni la suerte. Fue el tiempo. La bolsa de Corea del Sur ha sido, por donde se mire, una historia de récords tras récords en los últimos meses; eso llevó a que miles de personas, muchas de ellas jóvenes, entraran con dinero prestado; es decir, apostando un capital que no era suyo, persiguiendo una racha que ya llevaba meses. Cuando el mercado cayó, no tuvieron chance de esperar: fueron liquidados por sus acreedores en el punto más bajo, exactamente antes del rebote. Perdieron el capital y, con él, la posibilidad de estar presentes cuando el mercado se recuperó.</p>
+
+    <p>Ahí está la distinción que quiero nombrar con claridad: el error no fue invertir en bolsa. Fue hacerlo sin tiempo y sin margen propio —con deuda y con prisa. Son dos actividades que se visten igual y terminan distinto. Una es construir patrimonio con lo que ya es tuyo, dándole años para trabajar, incluida la posibilidad de atravesar una caída y seguir ahí para el rebote. La otra es apostar con el reloj corriendo en contra, donde una corrección de días te saca del juego antes de que puedas beneficiarte de la recuperación.</p>
+
+    <p>Seamos claros: no fue mala suerte ni falta de conocimiento. Fue una estrategia de entrada que no dejaba espacio para estar equivocado ni un solo día — y esta semana, ese espacio hubiera sido justo lo que necesitaba. El gobierno coreano ya empezó a poner límites a ese tipo de apalancamiento. Pero la lección no depende de la regulación: depende del límite emocional que marcas tú.</p>
+
+    <p>La bolsa es para todos, pero no para cualquiera. Es para quien entra con lo que ya tiene y con paciencia real — eso alcanza, incluso si el capital es modesto. No es para quien entra con lo que no tiene, corriendo contra un reloj que él mismo se puso.</p>
+
+    <p>Si estás construyendo patrimonio, esto no debería asustarte más de la cuenta. Debería ayudarte a reconocer por cuál puerta estás entrando, y si esa puerta te deja tiempo para quedarte hasta el rebote.</p>
+
+    <p>Nos leemos la próxima semana.</p>
+
+    <div class="signature">
+      <div class="name">Aldo Mallma</div>
+      <div class="role">Fundador, AMG Strategic Investments · amgpatrimonial.com</div>
+    </div>
+    <div class="disclaimer-note">Esto es una lectura de mercado y de método, no una recomendación de inversión personalizada — cada arquitectura patrimonial se diseña según el perfil de cada persona.</div>
+  </article>
+
+  <div class="archive">
+    <div class="section-label">Ediciones anteriores</div>
+
+    <details class="archive-item">
+      <summary>
+        <span>Edición 01 — Por qué tus dólares se movieron esta semana (y qué tiene que ver Google)</span>
+        <span class="archive-date">Semana del 27 de julio <span class="arrow">›</span></span>
+      </summary>
+      <div class="archive-body">
+        <p>Arrancamos esta nueva sección — Brújula Patrimonial — con algo que probablemente ya sentiste en el bolsillo esta semana.</p>
+        <p>Si esta semana tanqueaste tu carro para celebrar Fiestas Patrias, o sabiamente elegiste TuCambista para hacerte de dólares para tus vacas, de seguro notaste que fuiste víctima de la volatilidad financiera una vez más. No es casualidad: se recrudecieron los ataques diarios entre Estados Unidos e Irán, con amenaza de bloqueo en el estrecho de Ormuz y en otras rutas clave del comercio marítimo mundial. Eso ha llevado al petróleo a subir cinco días seguidos, y en momentos así el dólar suele actuar como refugio.</p>
+        <p>La lectura que me importa dejarte no es "corre a comprar dólares" — es entender que este tipo de movimiento suele ser ruido de corto plazo, ligado a un evento puntual, no un cambio de fondo. La habilidad de distinguir un susto pasajero de una tendencia real es, en el fondo, de lo que se trata invertir con criterio.</p>
+        <p>Y hablando de distinguir ruido de fondo real, esta semana pasó algo en Wall Street que es un ejemplo perfecto. Alphabet (Google) presentó resultados que superaron toda expectativa — ingresos arriba de lo estimado, su negocio de nube creciendo 82% interanual. Y sin embargo, la acción cayó más de 7% en un día, borrando cerca de 300 mil millones de dólares en valor de mercado. El motivo no fue el resultado, sino el anuncio de que la empresa gastará mucho más de lo previsto en los próximos años en infraestructura de inteligencia artificial. El mercado no premia el pasado, reacciona a lo que viene.</p>
+        <p>Entonces, ¿cayó Google — una empresa top — debería salir corriendo a comprarla porque "está barata"? Tampoco. Y esta es, quizás, la lección más importante de todas: una caída de 7% en una semana no dice casi nada sobre si una empresa es una buena inversión. Esa misma acción puede estar plana durante 6 meses y luego subir 30% en un año. El precio de corto plazo es ruido; lo que construye patrimonio es el tiempo que le das a una decisión bien pensada, no el acierto de comprar o vender en el momento exacto.</p>
+        <p>Estamos en semana de descanso, muchos con la familia o fuera de la rutina, con las vacaciones escolares de por medio. Igual quise que este primer espacio les llegue, para que la próxima vez que el dólar se mueva o leas el desplome de una gigante como Google en las noticias, tengan un poco más de contexto.</p>
+        <p>Nos leemos el próximo lunes.</p>
+        <div class="signature">
+          <div class="name">Aldo Mallma</div>
+          <div class="role">Fundador, AMG Strategic Investments · amgpatrimonial.com</div>
+        </div>
+        <div class="disclaimer-note">Esto es una lectura de mercado y de método, no una recomendación de inversión personalizada — cada arquitectura patrimonial se diseña según el perfil de cada persona.</div>
+      </div>
+    </details>
+
+  </div>
+
+</main>
+
+<footer>
+  <img src="assets/logo-footer.svg" alt="AMG">
+  <div class="footer-tag">Tu capital, con criterio y claridad.</div>
+  <div class="footer-links">
+    <a href="https://amgpatrimonial.com/#arquitectura">Arquitectura</a>
+    <a href="https://amgpatrimonial.com/metodo.html">El método</a>
+    <a href="https://amgpatrimonial.com/AMG_Simulador.html">Diagnóstico</a>
+    <a href="https://amgpatrimonial.com/AMG_Report_Jun26.html">Resultados</a>
+    <a href="https://amgpatrimonial.com/#conversar">Conversemos</a>
+  </div>
+  <div class="footer-legal">AMG Strategic Investments · Acompañamiento en inversiones y arquitectura patrimonial — no constituye asesoría financiera regulada ni garantiza rendimientos. Toda decisión de inversión es del cliente. Perú · HISPAM.</div>
+</footer>
+
+</body>
+</html>
