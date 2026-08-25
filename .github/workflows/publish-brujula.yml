@@ -1,0 +1,47 @@
+name: Publicar Brújula Patrimonial
+
+# Se dispara solo cuando se sube o edita un archivo dentro de content/*.md
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**.md'
+
+permissions:
+  contents: write  # necesario para que el bot pueda hacer commit del HTML actualizado
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # necesitamos el commit anterior para detectar qué archivo cambió
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Detectar archivo de contenido nuevo
+        id: detectar
+        run: |
+          ARCHIVO=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'content/*.md' | tail -n 1)
+          if [ -z "$ARCHIVO" ]; then
+            echo "No se detectó un archivo .md nuevo en content/. Abortando."
+            exit 1
+          fi
+          echo "Archivo detectado: $ARCHIVO"
+          echo "archivo=$ARCHIVO" >> "$GITHUB_OUTPUT"
+
+      - name: Generar HTML actualizado
+        run: python3 build/generar_html.py "${{ steps.detectar.outputs.archivo }}"
+
+      - name: Commit y push del HTML publicado
+        run: |
+          git config user.name "AMG Bot"
+          git config user.email "bot@amgpatrimonial.com"
+          git add AMG_Brujula_Patrimonial.html
+          git commit -m "Auto-publicar $(basename ${{ steps.detectar.outputs.archivo }})" || echo "Sin cambios que commitear"
+          git push
